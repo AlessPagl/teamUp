@@ -11,6 +11,17 @@ export class RegistrazioneComponent implements OnInit {
     console.log("ciao sono qui");
   }
 
+  public tipo="password";
+
+  showPwd() {
+    
+    if (this.tipo === "password") {
+      this.tipo = "text";
+    } else {
+      this.tipo = "password";
+    }
+  }
+
   ngOnInit(): void {
   }
 
