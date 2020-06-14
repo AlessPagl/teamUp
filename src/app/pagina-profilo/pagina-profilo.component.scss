@@ -1,7 +1,7 @@
-
 body
 {
-    background: #535353;
+    background-color: #0f1721;
+    padding: 60px;
 }
 
 .emp-profile{
@@ -35,10 +35,11 @@ body
     top: 0;
 }
 .profile-head h5{
-    color: #333;
+    color: #0f1721;
 }
 .profile-head h6{
-    color: #940404;
+    color: #ffffff;
+    font-weight: 400;
 }
 .profile-edit-btn{
     border: none;
@@ -59,7 +60,7 @@ body
 }
 .profile-head .nav-tabs .nav-link.active{
     border: none;
-    border-bottom:2px solid #940404;
+    border-bottom:2px solid #0f1721;
 }
 .profile-work{
     padding: 14%;
@@ -67,14 +68,14 @@ body
 }
 .profile-work p{
     font-size: 12px;
-    color: #940404;
+    color: #0f1721          ;
     font-weight: 600;
     margin-top: 10%;
 }
 .profile-work a{
     text-decoration: none;
-    color: #000000;
-    font-weight: 600;
+    color: #ffffff;
+    font-weight: 400;
     font-size: 14px;
 }
 .profile-work ul{
@@ -84,16 +85,24 @@ body
     font-weight: 1200;
 }
 .profile-tab p{
-    font-weight: 600;
-    color: #940404;
+    font-weight: 400;
+    color: #ffffff;
 }
 
 .container
 {
-    background: #c4c4c4;
+    background: #0059B3;
 }
 .nav-link.active, .profile-edit-btn
 {
     background-color: whitesmoke;
 }
 
+.navbar {
+    background: #223449;
+}
+
+.p
+{
+    color: white;
+}

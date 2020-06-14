@@ -2,39 +2,27 @@
     border-color: #ced4da;
 }
 
-form
-{
+form {
     padding: 100px;
 }
 
-body
-{
-    
-    background-color: #535353;
+body {
+    background-color: #0f1721;
+    padding: 100px;
 }
 
-.navbar
-{
-    background-color: #c4c4c4;
+.navbar {
+    background: #223449;
 }
 
-.card
-{
-    background-color: #c4c4c4;
-}
-
-.card-body
-{
+.card-body {
+    background-color: #0059B3;
     padding-top: 100px;
 }
 
-a
-{
-    text-align: right;
+.avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
-
-
-/* .form-group
-{
-    margin-bottom: 2rem;
-} */

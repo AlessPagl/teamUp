@@ -7,15 +7,13 @@
 <body>
 
   <div class="container-fluid">
-    <!-- Image and text -->
-    <!-- <nav class="navbar navbar-fixed-top">
-      <a class="navbar-brand" href="#">
-        <img
-          src="https://lh3.googleusercontent.com/proxy/hsdIboO2Bp1ZIpXYVVI-LbRslm4z42VlcVLBYhNHEReT6f6n0bwxkiyWz_ibDbjpIGih9nvIlf7-dAb-oj5cykBLp-rP-jO_4HteKxvujWtSU3nKMheyH2wFHujjs-P5jwzESIY"
-          width="30" height="30" class="d-inline-block align-top">
-        TeamUp
-      </a>
-    </nav> -->
+    <nav class="navbar navbar-expand-sm navbar-fixed-top">
+      <!-- Brand/logo -->
+      <a class="navbar-brand">Logo</a>
+      <div class="ml-auto">
+        <a routerLink="/registrazione" routerLinkActive="active">Non ti sei ancora registrato? Registrati</a>
+      </div>
+    </nav>
   </div>
 
   <div class="container">
@@ -31,17 +29,13 @@
             <label>Password</label>
             <div class="input-group mb-3">
               <input type={{tipo}} id="pwd" class="form-control" placeholder="Enter Password">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" (click)="showPwd()">Mostra</button>
+              <div class="input-group-append mx-auto">
+                <button class="btn btn-primary" type="button" (click)="showPwd()">Mostra</button>
               </div>
             </div>
           </div>
           <div class="mx-auto w-50">
             <button type="submit" class="btn btn-primary">Accedi</button>
-          </div>
-          <div class="mx-auto w-50">
-            <a routerLink="/registrazione" routerLinkActive="active">Non ti sei ancora registrato? Registrati</a>
-            
           </div>
         </form>
 
@@ -54,5 +48,3 @@
 </body>
 
 </html>
-
-
