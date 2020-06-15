@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { FormGroup, FormControl, FormControlDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,6 @@ import { Observable } from 'rxjs';
 })
 
 export class LoginComponent implements OnInit {
-
-  /* public firestore; */
 
   ngOnInit(): void {
   }
@@ -26,32 +26,21 @@ export class LoginComponent implements OnInit {
     }
   } */
 
-  constructor(public firestore: AngularFirestore) {
+  public profileForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  });
 
-    /* this.firestore = firestore; */
+  login() {
+    console.log(this.profileForm.get('email'), this.profileForm.get('password'));
+    console.log("cia");
+    /* var result = await this.afAuth.signInWithEmailAndPassword(email, password)
+    this.router.navigate(['admin/list']); */
+  }
+
+  constructor(private authService: AuthService) {
 
 
   }
-
-  scrivi() {
-    console.log(this.firestore.collection("cities")
-      .get()
-      .forEach((citta) => {
-        citta
-          .forEach(cittaLetta => {
-            console
-              .log(cittaLetta.data())
-          })
-      }))
-
-    /* .then(function() {
-      console.log("Document successfully written!");
-  })
-  .catch(function(error) {
-      console.error("Error writing document: ", error);
-  }); */
-
-  }
-
 
 }

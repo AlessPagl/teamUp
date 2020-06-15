@@ -12,6 +12,7 @@ import { PaginaNonTrovataComponent } from './pagina-non-trovata/pagina-non-trova
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from "@angular/fire/auth";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
