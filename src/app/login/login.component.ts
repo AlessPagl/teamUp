@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { FormGroup, FormControl, FormControlDirective } from '@angular/forms';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -26,21 +25,24 @@ export class LoginComponent implements OnInit {
     }
   } */
 
-  public profileForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
-  });
-
-  login() {
-    console.log(this.profileForm.get('email'), this.profileForm.get('password'));
-    console.log("cia");
-    /* var result = await this.afAuth.signInWithEmailAndPassword(email, password)
-    this.router.navigate(['admin/list']); */
+  constructor(private authService: AuthService, public afAuth: AngularFireAuth, public router: Router) {
+    
+    this.afAuth.signOut().then(()=>{this.afAuth.authState.subscribe((user) => {
+      if (user!= null)
+        this.router.navigate(['/home']);
+    })});
+ 
   }
 
-  constructor(private authService: AuthService) {
+  public utente = { email: "", password: "" };
 
+  async login() {
+
+    var result = await this.afAuth.signInWithEmailAndPassword(this.utente.email, this.utente.password);
+    this.router.navigate(['/home']);
 
   }
+
+
 
 }

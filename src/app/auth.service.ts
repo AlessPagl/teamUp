@@ -24,18 +24,6 @@ export class AuthService {
 
   }
 
-  async login(email: string, password: string) {
-    console.log(email);
-    console.log(password);
-    console.log("cia");
-    /* var result = await this.afAuth.signInWithEmailAndPassword(email, password)
-    this.router.navigate(['admin/list']); */
-  }
-
-
-  async register(email: string, password: string) {
-    var result = await this.afAuth.createUserWithEmailAndPassword(email, password)
-  }
 
   async sendPasswordResetEmail(passwordResetEmail: string) {
     return await this.afAuth.sendPasswordResetEmail(passwordResetEmail);

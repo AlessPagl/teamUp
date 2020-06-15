@@ -13,6 +13,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
     LoginComponent,
     RegistrazioneComponent,
     PaginaProfiloComponent,
-    PaginaNonTrovataComponent
+    PaginaNonTrovataComponent,
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
