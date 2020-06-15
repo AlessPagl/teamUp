@@ -28,6 +28,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     HomeComponent,
     NavbarComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,7 +37,14 @@ import { NavbarComponent } from './navbar/navbar.component';
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule
   ],
+  entryComponents: [
+    LoginComponent,
+    HomeComponent,
+    RegistrazioneComponent
+  ],
+
   providers: [],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
