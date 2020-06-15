@@ -22,7 +22,7 @@ export class RegistrazioneComponent implements OnInit {
     if (this.utente.password === this.utente.confPassword) {
 
       var result = await this.afAuth.createUserWithEmailAndPassword(this.utente.email, this.utente.password);
-      this.firestore.collection("Utente").add({
+      this.firestore.collection("Utente").doc(result.user.uid).set({
         nome: this.utente.nome,
         cognome: this.utente.cognome,
         numero_telefono: this.utente.num_telefono,

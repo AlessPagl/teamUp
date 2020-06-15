@@ -1,1 +1,60 @@
 
+<body>
+<!-- NavBar utente non loggato -->
+<div *ngIf="logged===false" class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-fixed-top">
+        <a class="navbar-brand text-white">TEAMUP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+</div>
+
+<!-- *ngIf="logged===true" -->
+
+<!-- NavBar utente loggato -->
+<div *ngIf="logged===true" >
+    <nav class="navbar navbar-expand-lg" style="text-align: center;">
+        <a class="navbar-brand text-white">TEAMUP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a routerLink="/home" routerLinkActive="active">Home</a>    
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/pagina-profilo" routerLinkActive="active">Profilo</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- <div *ngIf="logged===true" class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
+        <a class="navbar-brand text-white">TEAMUP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a routerLink="/home" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a routerLink="/pagina-profilo" routerLinkActive="active">Profilo</a>
+                </li>
+            </ul>
+            <div class="mx-auto">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Cerca" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div> -->

@@ -3,23 +3,22 @@
 <head></head>
 
 <body>
-    <div class="container-fluid">
-
-        <nav class="navbar navbar-expand-sm navbar-fixed-top">
-            <a class="navbar-brand text-white">TEAMUP</a>
-            <div>
-                <a routerLink="/home" routerLinkActive="active">HOME  </a>
-                <a routerLink="/pagina-profilo" routerLinkActive="active">PROFILO</a>
-            </div>
-        </nav>
-
-    </div>
 
     <!-- FATTO DA ALESSIOOOOOOOOOOO -->
 
     <div class="container">
         <div class="row">
             <div class="col-md-3 text-white">
+                <!-- card per foto -->
+                <div class="card" style="width: 200px; height: 200px;">
+                    <img class="card-img-top" src="https://randomuser.me/api/portraits/women/44.jpg"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    -->
+                    </div>
+                </div>
+                <!-- fine card per foto -->
                 <!-- <div class="avatar-wrapper">
                     <img class="profile-pic" src="" />
                     <div class="upload-button">
@@ -27,12 +26,17 @@
                     </div>
                     <input class="file-upload" type="file" accept="image/*" />
                 </div> -->
-                
+
                 <h3>SKILLS</h3>
+                <dl>
+                    Lorem ipsum dolor
+                    sit amet, consectetur adipisicing
+                    elit.
+                </dl>
             </div>
 
-            <div class="col-md-6 mx-auto">
-                <h4 class="text-white"> Nome Cognome </h4>
+            <div class="col-lg-6 mx-auto">
+                <h2 class="text-white"> Nome Cognome </h2>
                 <br>
                 <ul class="nav nav-tabs text-white" role="tablist">
                     <li role="presentation "><a href="#info" aria-controls="info" role="tab" data-toggle="tab"
@@ -47,9 +51,44 @@
 
                     <div role="tabpanel" class="tab-pane active" id="info">
                         <h3>Informazioni</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nostrum error perferendis
-                            dolorem doloremque delectus animi inventore cum beatae, voluptatem id distinctio nobis
-                            laudantium aut illum ducimus temporibus pariatur non!</p>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4>Telefono:</h4>
+                            </div>
+                            <div class="col-md-8">
+                                <input bind-disabled=false type="text" style="color: black;">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4>Città di Residenza:</h4>
+                            </div>
+                            <div class="col-md-8">
+                                <input bind-disabled=false type="text" style="color: black;" cols= "40">
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4>CV:</h4>
+                            </div>
+                            <div class="col-lg-4">
+                                <textarea rows="3"  cols= "40" readonly=false type="text" style="color: black;">
+                                    </textarea>
+                            </div>
+                        </div>
+
+
+                        <!-- <a>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, at obcaecati. 
+                            Nemo blanditiis ducimus facilis illum et neque quibusdam ipsum odio unde natus labore 
+                            aliquid eius, ipsa iusto ad sequi!
+                        </a> -->
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="progetti">
@@ -69,7 +108,5 @@
     </div>
 
     <!-- FINE FATTO DA ALESSIOOOOOOOOOOO -->
-
 </body>
-
 </html>
