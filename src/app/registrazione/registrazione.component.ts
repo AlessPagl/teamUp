@@ -7,20 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrazioneComponent implements OnInit {
 
-  constructor() { 
-    console.log("ciao sono qui");
-  }
-
-  public tipo="password";
-
-  showPwd() {
-    
-    if (this.tipo === "password") {
-      this.tipo = "text";
-    } else {
-      this.tipo = "password";
-    }
-  }
+  constructor() {}
 
   ngOnInit(): void {
   }

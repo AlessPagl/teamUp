@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +9,11 @@ import { RegistrazioneComponent } from './registrazione/registrazione.component'
 import { PaginaProfiloComponent } from './pagina-profilo/pagina-profilo.component';
 import { PaginaNonTrovataComponent } from './pagina-non-trovata/pagina-non-trovata.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,11 +21,14 @@ import { PaginaNonTrovataComponent } from './pagina-non-trovata/pagina-non-trova
     LoginComponent,
     RegistrazioneComponent,
     PaginaProfiloComponent,
-    PaginaNonTrovataComponent,
+    PaginaNonTrovataComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    FormsModule,
+    AngularFirestoreModule.enablePersistence()
   ],
   providers: [],
   bootstrap: [AppComponent]

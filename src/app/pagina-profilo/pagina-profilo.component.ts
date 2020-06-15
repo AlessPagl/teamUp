@@ -13,5 +13,4 @@ export class PaginaProfiloComponent implements OnInit {
   }
 
 
-
 }

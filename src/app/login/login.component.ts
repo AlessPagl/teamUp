@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +10,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  /* public firestore; */
 
   ngOnInit(): void {
   }
 
-  public tipo="password";
+  /* public tipo="password";
 
   showPwd() {
     
@@ -22,6 +24,34 @@ export class LoginComponent implements OnInit {
     } else {
       this.tipo = "password";
     }
+  } */
+
+  constructor(public firestore: AngularFirestore) {
+
+    /* this.firestore = firestore; */
+
+
   }
+
+  scrivi() {
+    console.log(this.firestore.collection("cities")
+      .get()
+      .forEach((citta) => {
+        citta
+          .forEach(cittaLetta => {
+            console
+              .log(cittaLetta.data())
+          })
+      }))
+
+    /* .then(function() {
+      console.log("Document successfully written!");
+  })
+  .catch(function(error) {
+      console.error("Error writing document: ", error);
+  }); */
+
+  }
+
 
 }
