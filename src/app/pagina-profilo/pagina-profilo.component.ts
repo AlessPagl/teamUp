@@ -12,4 +12,6 @@ export class PaginaProfiloComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
 }
