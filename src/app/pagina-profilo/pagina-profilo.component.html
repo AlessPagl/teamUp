@@ -4,7 +4,6 @@
 
 <body>
 
-    <!-- FATTO DA ALESSIOOOOOOOOOOO -->
 
     <div class="container">
         <div class="row">
@@ -69,7 +68,6 @@
                                 <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
                                     value="{{email}}" name="email" required [(ngModel)]="email">
                             </div>
-
                         </div>
 
                         <br>
@@ -79,10 +77,6 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-secondary" (click)="modificaProfilo()">{{testo}}</button>
-                            </div>
-
-                            <div class="col-md-2">
-                                <button *ngIf="isDisabled==false" type="button" class="btn btn-secondary" (click)="modificaPassword()">Password</button>
                             </div>
                         </div>
 

@@ -24,6 +24,7 @@ export class RegistrazioneComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
   async registrazione() {
 
     if (this.utente.password === this.utente.confPassword) {
@@ -35,7 +36,13 @@ export class RegistrazioneComponent implements OnInit {
         numero_telefono: this.utente.numero_telefono,
         citta: this.utente.citta,
         descrizione: this.utente.descrizione
-      })
+      });
+      
+      (await this.afAuth.currentUser).sendEmailVerification().then(function() {
+        // Email sent.
+      }).catch(function(error) {
+        // An error happened.
+      });
 
       var result = await this.afAuth.signInWithEmailAndPassword(this.utente.email, this.utente.password);
       this.router.navigate(['/home']);
