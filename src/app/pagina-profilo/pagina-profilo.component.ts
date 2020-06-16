@@ -52,13 +52,13 @@ export class PaginaProfiloComponent implements OnInit {
 
   }
 
-  async modificaEmail() {
+ /*  async modificaEmail() {
 
     this.afAuth.authState.subscribe(user => {
       user.updateEmail(this.email)
     })
 
-  }
+  } */
 
   public isDisabled = true;
   testo = "Modifica";
@@ -72,7 +72,7 @@ export class PaginaProfiloComponent implements OnInit {
       console.log(this.utente);
       this.isDisabled = true;
       this.modificheValori(),
-      this.modificaEmail(),
+      /* this.modificaEmail(), */
       this.testo = "Modifica";
     }
   }
