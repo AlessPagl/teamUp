@@ -13,6 +13,7 @@ export class PaginaProfiloComponent implements OnInit {
 
   public utente = { citta: "", cognome: "", nome: "", numero_telefono: "", descrizione: "" };
   public email = "";
+  public password = "";
 
   constructor(public firestore: AngularFirestore, private authService: AuthService, public afAuth: AngularFireAuth, public router: Router) {
 
@@ -54,9 +55,7 @@ export class PaginaProfiloComponent implements OnInit {
 
   async modificaEmail() {
 
-    this.afAuth.authState.subscribe(user => {
-      user.updateEmail(this.email)
-    })
+    (await this.afAuth.currentUser).updateEmail(this.email)
 
   }
 
@@ -75,6 +74,16 @@ export class PaginaProfiloComponent implements OnInit {
       this.modificaEmail(),
       this.testo = "Modifica";
     }
+  }
+
+  modificaPassword() {
+    
+    this.afAuth.sendPasswordResetEmail(this.email).then(function() {
+
+    }).catch(function(error) {
+
+    });
+
   }
 
 
