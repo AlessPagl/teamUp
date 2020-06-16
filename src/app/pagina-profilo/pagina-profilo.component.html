@@ -17,84 +17,84 @@
                 </div>
 
                 <h3>SKILLS</h3>
-                <dl>
-                    Lorem ipsum dolor
-                    sit amet, consectetur adipisicing
-                    elit.
-                </dl>
+                <textarea bind-disabled="isDisabled" rows="6" cols="25" type="text" style="color: black;"
+                    placeholder="Modifica con una beve descrizione"></textarea>
             </div>
 
             <div class="col-lg-6 mx-auto">
                 <h2 class="text-white">{{utente.nome}} {{utente.cognome}}</h2>
+
                 <br>
-                <ul class="nav nav-tabs text-white" role="tablist">
-                    <li role="presentation "><a href="#info" aria-controls="info" role="tab" data-toggle="tab"
-                            class="border-white">Informazioni</a>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#informazioni">Informazioni</a>
                     </li>
-                    <li role="presentation"><a href="#progetti" aria-controls="progetti" role="tab" data-toggle="tab"
-                            class="border-white">Progetti</a>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#progetti">Progetti</a>
                     </li>
                 </ul>
 
-                <div class="tab-content text-white">
+                <br>
 
-                    <div role="tabpanel" class="tab-pane active" id="info">
-                        <h3>Informazioni</h3>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane container active" id="informazioni">
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <h4>Telefono:</h4>
+                            <div class="col-md-4 text-white">
+                                <h5>Telefono:</h5>
                             </div>
                             <div class="col-md-8">
-                                <input bind-disabled=false readonly="true" type="text" style="color: #0f1721;" value="{{utente.num_telefono}}">
+                                <input bind-disabled="isDisabled" type="text" style="color: #0f1721;" value="{{utente.num_telefono}}">
                             </div>
                         </div>
 
-
                         <div class="row">
-                            <div class="col-md-4">
-                                <h4>Città di Residenza:</h4>
+                            <div class="col-md-4 text-white">
+                                <h5>Città:</h5>
                             </div>
                             <div class="col-md-8">
-                                <input bind-disabled=false type="text" style="color: black;" cols= "40">
+                                <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
+                                    value="{{utente.citta}}">
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-4 text-white">
+                                <h5>Email</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
+                                    value="{{utente.email}}">
+                            </div>
+                        </div>
+
+                        <br>
 
 
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <h4>CV:</h4>
-                            </div>
-                            <div class="col-lg-4">
-                                <textarea rows="3"  cols= "45"  type="text" style="color: black;">
-                                    </textarea>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-secondary" (click)="modificaProfilo()">{{testo}}</button>
                             </div>
                         </div>
 
+                    </div>
 
-                        <!-- <a>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, at obcaecati. 
-                            Nemo blanditiis ducimus facilis illum et neque quibusdam ipsum odio unde natus labore 
-                            aliquid eius, ipsa iusto ad sequi!
-                        </a> -->
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="progetti">
-                        <h3>Progetti</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nostrum error perferendis
-                            dolorem doloremque delectus animi inventore cum beatae, voluptatem id distinctio nobis
-                            laudantium aut illum ducimus temporibus pariatur non!</p>
-                    </div>
+
+                    <div class="tab-pane container fade" id="progetti">...</div>
 
                 </div>
-            </div>
 
-            <div class="col-md-2 ml-auto">
-                <button type="button" class="btn btn-secondary">Modifica</button>
             </div>
         </div>
+
     </div>
+
 
     <!-- FINE FATTO DA ALESSIOOOOOOOOOOO -->
 </body>
+
 </html>

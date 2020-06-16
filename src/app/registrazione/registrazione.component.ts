@@ -19,7 +19,7 @@ export class RegistrazioneComponent implements OnInit {
     });
   }
 
-  public utente = { nome: "", cognome: "", num_telefono: "", citta: "", email: "", password: "", confPassword: "" };
+  public utente = { nome: "", cognome: "", num_telefono: "", citta: "", email: "", password: "", confPassword: "", descrizione: ""};
 
   ngOnInit(): void {
   }
@@ -33,7 +33,8 @@ export class RegistrazioneComponent implements OnInit {
         nome: this.utente.nome,
         cognome: this.utente.cognome,
         numero_telefono: this.utente.num_telefono,
-        città: this.utente.citta
+        città: this.utente.citta,
+        descrzione: this.utente.descrizione
       })
 
       var result = await this.afAuth.signInWithEmailAndPassword(this.utente.email, this.utente.password);
