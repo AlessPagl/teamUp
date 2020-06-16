@@ -18,7 +18,7 @@
 
                 <h3>SKILLS</h3>
                 <textarea bind-disabled="isDisabled" rows="6" cols="25" type="text" style="color: black;"
-                    placeholder="Modifica con una beve descrizione"></textarea>
+                    placeholder="Modifica con una beve descrizione" name="descrizione" required [(ngModel)]="utente.descrizione"></textarea>
             </div>
 
             <div class="col-lg-6 mx-auto">
@@ -47,7 +47,7 @@
                                 <h5>Telefono:</h5>
                             </div>
                             <div class="col-md-8">
-                                <input bind-disabled="isDisabled" type="text" style="color: #0f1721;" value="{{utente.num_telefono}}">
+                                <input bind-disabled="isDisabled" type="text" style="color: #0f1721;" value="{{utente.numero_telefono}}" name="numero_telefono" required [(ngModel)]="utente.numero_telefono">
                             </div>
                         </div>
 
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-8">
                                 <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
-                                    value="{{utente.citta}}">
+                                    value="{{utente.citta}}" name="citta" required [(ngModel)]="utente.citta">
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-md-8">
                                 <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
-                                    value="{{utente.email}}">
+                                    value="{{email}}" name="email" required [(ngModel)]="email">
                             </div>
                         </div>
 

@@ -19,7 +19,7 @@ export class RegistrazioneComponent implements OnInit {
     });
   }
 
-  public utente = { nome: "", cognome: "", num_telefono: "", citta: "", email: "", password: "", confPassword: "", descrizione: ""};
+  public utente = { nome: "", cognome: "", numero_telefono: "", citta: "", email: "", password: "", confPassword: "", descrizione: ""};
 
   ngOnInit(): void {
   }
@@ -32,9 +32,9 @@ export class RegistrazioneComponent implements OnInit {
       this.firestore.collection("Utente").doc(result.user.uid).set({
         nome: this.utente.nome,
         cognome: this.utente.cognome,
-        numero_telefono: this.utente.num_telefono,
-        città: this.utente.citta,
-        descrzione: this.utente.descrizione
+        numero_telefono: this.utente.numero_telefono,
+        citta: this.utente.citta,
+        descrizione: this.utente.descrizione
       })
 
       var result = await this.afAuth.signInWithEmailAndPassword(this.utente.email, this.utente.password);
