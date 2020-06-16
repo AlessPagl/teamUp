@@ -1,3 +1,11 @@
 .navbar {
     background: #223449;
 }
+
+.navbar-toggler {
+    border: 1px solid white;
+}
+ 
+.navbar-toggler-icon {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAA60lEQVR4Xu2asRHCQBDEREABFENEO0BRQDtEFEMBJIwDJ8w/OUiuwLu/Ot/veIP82cj1kwElQO5ACMgD0BAMgRCQOxAC8gB8/QrsgTOw+3GTnsAFeIx0zBBYxN+B7Y+LX1//BRxGJswMuALHPxG/yrgBp09NGTA5ZT0Ciy/qIfhn+M/ltAhpjnoitASUALkDISAPQJ1gCHxBQL0K6y9D9QH2QkSPQH2AZUFqD7Cc9ExnCSgBcgdCQB6A+oAQqA8YO6C/DNUH1AfIf5GpD7AsSO0BlpOuD+gHibEDzYBmgNyBEJAHoEYoBOwIvAHUGTBBR9yR1AAAAABJRU5ErkJggg==);
+}

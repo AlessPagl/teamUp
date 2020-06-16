@@ -9,23 +9,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 text-white">
-                <!-- card per foto -->
                 <div class="card" style="width: 200px; height: 200px;">
                     <img class="card-img-top" src="https://randomuser.me/api/portraits/women/44.jpg"
                         alt="Card image cap">
                     <div class="card-body">
-                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    -->
                     </div>
                 </div>
-                <!-- fine card per foto -->
-                <!-- <div class="avatar-wrapper">
-                    <img class="profile-pic" src="" />
-                    <div class="upload-button">
-                        <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
-                    </div>
-                    <input class="file-upload" type="file" accept="image/*" />
-                </div> -->
 
                 <h3>SKILLS</h3>
                 <dl>
@@ -36,7 +25,7 @@
             </div>
 
             <div class="col-lg-6 mx-auto">
-                <h2 class="text-white"> Nome Cognome </h2>
+                <h2 class="text-white">{{utente.nome}} {{utente.cognome}}</h2>
                 <br>
                 <ul class="nav nav-tabs text-white" role="tablist">
                     <li role="presentation "><a href="#info" aria-controls="info" role="tab" data-toggle="tab"
@@ -57,7 +46,7 @@
                                 <h4>Telefono:</h4>
                             </div>
                             <div class="col-md-8">
-                                <input bind-disabled=false type="text" style="color: black;">
+                                <input bind-disabled=false readonly="true" type="text" style="color: #0f1721;" value="{{utente.num_telefono}}">
                             </div>
                         </div>
 
@@ -78,7 +67,7 @@
                                 <h4>CV:</h4>
                             </div>
                             <div class="col-lg-4">
-                                <textarea rows="3"  cols= "40" readonly=false type="text" style="color: black;">
+                                <textarea rows="3"  cols= "45"  type="text" style="color: black;">
                                     </textarea>
                             </div>
                         </div>
@@ -90,7 +79,6 @@
                             aliquid eius, ipsa iusto ad sequi!
                         </a> -->
                     </div>
-
                     <div role="tabpanel" class="tab-pane" id="progetti">
                         <h3>Progetti</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nostrum error perferendis

@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  public id;
+
   constructor(public afAuth: AngularFireAuth, public router: Router) {
 
     this.afAuth.authState.subscribe((user) => {
