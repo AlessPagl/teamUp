@@ -10,7 +10,14 @@ import { Router } from '@angular/router';
 })
 export class RegistrazioneComponent implements OnInit {
 
-  constructor(public afAuth: AngularFireAuth, public firestore: AngularFirestore, public router: Router) { }
+  constructor(public afAuth: AngularFireAuth, public firestore: AngularFirestore, public router: Router) {
+    this.afAuth.signOut().then(() => {
+      this.afAuth.authState.subscribe((user) => {
+        if (user != null)
+          this.router.navigate(['/home']);
+      })
+    });
+  }
 
   public utente = { nome: "", cognome: "", num_telefono: "", citta: "", email: "", password: "", confPassword: "" };
 
@@ -29,7 +36,8 @@ export class RegistrazioneComponent implements OnInit {
         città: this.utente.citta
       })
 
-      this.router.navigate(['/pagina-profilo']);
+      var result = await this.afAuth.signInWithEmailAndPassword(this.utente.email, this.utente.password);
+      this.router.navigate(['/home']);
 
     }
   }
