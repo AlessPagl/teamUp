@@ -55,7 +55,7 @@ export class PaginaProfiloComponent implements OnInit {
 
   }
 
-  async modificaEmail() {
+ /*  async modificaEmail() {
 
     (await this.afAuth.currentUser).updateEmail(this.email);
     
@@ -65,7 +65,7 @@ export class PaginaProfiloComponent implements OnInit {
       // An error happened.
     });
 
-  }
+  } */
 
   public isDisabled = true;
   testo = "Modifica";
@@ -79,7 +79,7 @@ export class PaginaProfiloComponent implements OnInit {
       console.log(this.utente);
       this.isDisabled = true;
       this.modificheValori(),
-      this.modificaEmail(),
+      /* this.modificaEmail(), */
       this.testo = "Modifica";
     }
   }

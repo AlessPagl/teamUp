@@ -8,8 +8,8 @@
             <div class="form-group w-25 mx-auto">
 
                 <label class="text-white">Nome</label>
-                <input type="text" class="form-control" id="InputNome" placeholder="Inserisci Nome" name="nome" required
-                    [(ngModel)]="utente.nome">
+                <input type="text" class="form-control" id="InputNome" placeholder="Inserisci Nome" name="nome"
+                    [(ngModel)]="utente.nome" required>
 
             </div>
 
@@ -17,15 +17,15 @@
 
                 <label class="text-white">Cognome</label>
                 <input type="text" class="form-control" id="InputCognome" placeholder="Inserisci Cognome" name="cognome"
-                    required [(ngModel)]="utente.cognome">
+                    [(ngModel)]="utente.cognome" required>
 
             </div>
 
             <div class="form-group w-25 mx-auto">
 
-                <label class="text-white">Email</label>
-                <input type="text" class="form-control" id="InputEmail" placeholder="Inserisci Email" name="email"
-                    required [(ngModel)]="utente.email">
+                <label class="text-white" for="email">Email</label>
+                <input type="email" class="form-control" id="InputEmail" placeholder="Inserisci Email" name="email"
+                    [(ngModel)]="utente.email">
 
             </div>
 
@@ -33,7 +33,7 @@
 
                 <label class="text-white">Numero di telefono</label>
                 <input type="text" class="form-control" id="InputNumero" placeholder="Inserisci Numero"
-                    name="numero_telefono" required [(ngModel)]="utente.numero_telefono">
+                    name="numero_telefono" [(ngModel)]="utente.numero_telefono" required>
 
             </div>
 
@@ -41,7 +41,7 @@
 
                 <label class="text-white">Città</label>
                 <input type="text" class="form-control" id="InputCittà" placeholder="Inserisci Città" name="citta"
-                    required [(ngModel)]="utente.citta">
+                    [(ngModel)]="utente.citta" required>
 
             </div>
 
@@ -49,7 +49,7 @@
 
                 <label class="text-white">Password</label>
                 <input type="password" class="form-control" id="InputPassword" placeholder="Inserisci Password"
-                    name="password" required [(ngModel)]="utente.password">
+                    name="password" [(ngModel)]="utente.password" required>
 
             </div>
 
@@ -57,8 +57,8 @@
 
                 <label class="text-white">Conferma Password</label>
                 <input type="password" class="form-control" id="InputConfPassword"
-                    placeholder="Inserisci Conferma Password" name="confPassword" required
-                    [(ngModel)]="utente.confPassword">
+                    placeholder="Inserisci Conferma Password" name="confPassword" [(ngModel)]="utente.confPassword"
+                    required>
 
             </div>
 
