@@ -20,6 +20,7 @@ export class RegistrazioneComponent implements OnInit {
   }
 
   public teamMate = { nome: "", cognome: "", numero_telefono: "", citta: "", email: "", password: "", confPassword: "", descrizione: ""};
+  public vero;
 
   ngOnInit(): void {
   }
@@ -27,8 +28,11 @@ export class RegistrazioneComponent implements OnInit {
   
   async registrazione() {
 
-    if (this.teamMate.password === this.teamMate.confPassword) {
+    this.vero = false;
 
+    if ((this.teamMate.password === this.teamMate.confPassword) && (this.teamMate.nome != "") && (this.teamMate.cognome != "") && (this.teamMate.citta != "")) {
+
+      this.vero = false;
       var result = await this.afAuth.createUserWithEmailAndPassword(this.teamMate.email, this.teamMate.password);
       this.firestore.collection("teamMate").doc(result.user.uid).set({
         nome: this.teamMate.nome,
@@ -46,6 +50,11 @@ export class RegistrazioneComponent implements OnInit {
 
       var result = await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password);
       this.router.navigate(['/home']);
+
+    }
+    else {
+
+      this.vero = true; 
 
     }
   }
