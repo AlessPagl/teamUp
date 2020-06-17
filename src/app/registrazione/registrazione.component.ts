@@ -48,7 +48,6 @@ export class RegistrazioneComponent implements OnInit {
         // An error happened.
       });
 
-      var result = await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password);
       this.router.navigate(['/home']);
 
     }
