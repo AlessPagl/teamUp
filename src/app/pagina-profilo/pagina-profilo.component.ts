@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-pagina-profilo',
@@ -14,6 +15,7 @@ export class PaginaProfiloComponent implements OnInit {
   public utente = { citta: "", cognome: "", nome: "", numero_telefono: "", descrizione: "" };
   public email = "";
   public password = "";
+  public credenziali = firebase.auth.EmailAuthProvider.credential(this.email, this.password);
 
   constructor(public firestore: AngularFirestore, private authService: AuthService, public afAuth: AngularFireAuth, public router: Router) {
 
@@ -55,7 +57,13 @@ export class PaginaProfiloComponent implements OnInit {
 
   async modificaEmail() {
 
-    (await this.afAuth.currentUser).updateEmail(this.email)
+    (await this.afAuth.currentUser).updateEmail(this.email);
+    
+    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function() {
+      // User re-authenticated.
+    }).catch(function(error) {
+      // An error happened.
+    });
 
   }
 
@@ -76,12 +84,18 @@ export class PaginaProfiloComponent implements OnInit {
     }
   }
 
-  modificaPassword() {
+  async modificaPassword() {
     
     this.afAuth.sendPasswordResetEmail(this.email).then(function() {
 
     }).catch(function(error) {
 
+    });
+
+    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function() {
+      // User re-authenticated.
+    }).catch(function(error) {
+      // An error happened.
     });
 
   }

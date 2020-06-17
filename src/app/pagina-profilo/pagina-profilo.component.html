@@ -68,6 +68,7 @@
                                 <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
                                     value="{{email}}" name="email" required [(ngModel)]="email">
                             </div>
+
                         </div>
 
                         <br>
@@ -76,11 +77,14 @@
 
                         <div class="row">
                             <div class="col-md-2">
-                                <button type="button" class="btn btn-secondary" (click)="modificaProfilo()">{{testo}}</button>
+                                <button type="button" class="btn btn-secondary" (click)="modificaProfilo()">{{testo}}</button>   
                             </div>
+
                         </div>
 
                     </div>
+
+                    <a *ngIf="isDisabled==false" (click)="modificaPassword()" class="">Cambia Password</a>
 
 
                     <div class="tab-pane container fade" id="progetti">...</div>
