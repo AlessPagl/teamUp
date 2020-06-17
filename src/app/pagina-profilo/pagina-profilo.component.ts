@@ -24,11 +24,13 @@ export class PaginaProfiloComponent implements OnInit {
         this.router.navigate(['/login']);
     });
 
-    this.ngOnInit().then(() => { console.log(this.utente) });
+    this.acquisizioneProfilo().then(() => { console.log(this.utente) });
 
   }
 
-  async ngOnInit() {
+  ngOnInit(){}
+
+  async acquisizioneProfilo() {
 
     await this.afAuth.authState.subscribe((user) => {
       this.email = user.email;
@@ -55,7 +57,7 @@ export class PaginaProfiloComponent implements OnInit {
 
   }
 
- /*  async modificaEmail() {
+ async modificaEmail() {
 
     (await this.afAuth.currentUser).updateEmail(this.email);
     
@@ -65,7 +67,7 @@ export class PaginaProfiloComponent implements OnInit {
       // An error happened.
     });
 
-  } */
+  } 
 
   public isDisabled = true;
   testo = "Modifica";
@@ -76,10 +78,9 @@ export class PaginaProfiloComponent implements OnInit {
       this.testo = "Salva";
     }
     else {
-      console.log(this.utente);
       this.isDisabled = true;
       this.modificheValori(),
-      /* this.modificaEmail(), */
+      this.modificaEmail(),
       this.testo = "Modifica";
     }
   }
@@ -93,9 +94,9 @@ export class PaginaProfiloComponent implements OnInit {
     });
 
     (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function() {
-      // User re-authenticated.
+      // Utente autenticato
     }).catch(function(error) {
-      // An error happened.
+      // Errore
     });
 
   }
