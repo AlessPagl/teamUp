@@ -14,17 +14,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /* public tipo="password";
-
-  showPwd() {
-    
-    if (this.tipo === "password") {
-      this.tipo = "text";
-    } else {
-      this.tipo = "password";
-    }
-  } */
-
   constructor(private authService: AuthService, public afAuth: AngularFireAuth, public router: Router) {
     
     this.afAuth.signOut().then(()=>{this.afAuth.authState.subscribe((user) => {
@@ -34,15 +23,14 @@ export class LoginComponent implements OnInit {
  
   }
 
-  public utente = { email: "", password: "" };
+  public teamMate = { email: "", password: "" };
 
   async login() {
 
-    var result = await this.afAuth.signInWithEmailAndPassword(this.utente.email, this.utente.password);
+    var result = await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password);
     this.router.navigate(['/home']);
 
   }
-
 
 
 }

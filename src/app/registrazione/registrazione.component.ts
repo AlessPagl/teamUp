@@ -19,7 +19,7 @@ export class RegistrazioneComponent implements OnInit {
     });
   }
 
-  public utente = { nome: "", cognome: "", numero_telefono: "", citta: "", email: "", password: "", confPassword: "", descrizione: ""};
+  public teamMate = { nome: "", cognome: "", numero_telefono: "", citta: "", email: "", password: "", confPassword: "", descrizione: ""};
 
   ngOnInit(): void {
   }
@@ -27,15 +27,15 @@ export class RegistrazioneComponent implements OnInit {
   
   async registrazione() {
 
-    if (this.utente.password === this.utente.confPassword) {
+    if (this.teamMate.password === this.teamMate.confPassword) {
 
-      var result = await this.afAuth.createUserWithEmailAndPassword(this.utente.email, this.utente.password);
-      this.firestore.collection("Utente").doc(result.user.uid).set({
-        nome: this.utente.nome,
-        cognome: this.utente.cognome,
-        numero_telefono: this.utente.numero_telefono,
-        citta: this.utente.citta,
-        descrizione: this.utente.descrizione
+      var result = await this.afAuth.createUserWithEmailAndPassword(this.teamMate.email, this.teamMate.password);
+      this.firestore.collection("teamMate").doc(result.user.uid).set({
+        nome: this.teamMate.nome,
+        cognome: this.teamMate.cognome,
+        numero_telefono: this.teamMate.numero_telefono,
+        citta: this.teamMate.citta,
+        descrizione: this.teamMate.descrizione
       });
       
       (await this.afAuth.currentUser).sendEmailVerification().then(function() {
@@ -44,7 +44,7 @@ export class RegistrazioneComponent implements OnInit {
         // An error happened.
       });
 
-      var result = await this.afAuth.signInWithEmailAndPassword(this.utente.email, this.utente.password);
+      var result = await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password);
       this.router.navigate(['/home']);
 
     }
