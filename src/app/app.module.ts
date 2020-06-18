@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { IdeaProgettoComponent } from './idea-progetto/idea-progetto.component';
+import { AmministratoreComponent } from './amministratore/amministratore.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { IdeaProgettoComponent } from './idea-progetto/idea-progetto.component';
     PaginaNonTrovataComponent,
     HomeComponent,
     NavbarComponent,
-    IdeaProgettoComponent
+    IdeaProgettoComponent,
+    AmministratoreComponent
   ],
 
   imports: [
