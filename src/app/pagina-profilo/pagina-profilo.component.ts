@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -17,19 +16,23 @@ export class PaginaProfiloComponent implements OnInit {
   public password = "";
   public credenziali = firebase.auth.EmailAuthProvider.credential(this.email, this.password);
 
-  constructor(public firestore: AngularFirestore, private authService: AuthService, public afAuth: AngularFireAuth, public router: Router) {
+  constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
 
     this.afAuth.authState.subscribe((user) => {
       if (user === null)
         this.router.navigate(['/login']);
     });
 
-    this.ngOnInit().then(() => { console.log(this.utente) });
+    this.autenticazioneProfilo().then(() => { console.log(this.utente) });
 
   }
-  // 
-  async ngOnInit() {
 
+
+  ngOnInit() {}
+
+  
+  async autenticazioneProfilo() {
+ 
     await this.afAuth.authState.subscribe((user) => {
       this.email = user.email;
       this.firestore.collection("Utente").doc(user.uid).get().forEach((user) => {
