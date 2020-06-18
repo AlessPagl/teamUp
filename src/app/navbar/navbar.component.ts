@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { HomeComponent } from '../home/home.component';
 import { LoginComponent } from '../login/login.component';
@@ -14,12 +13,11 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   public logged = false;
 
-  constructor(private authService: AuthService, public afAuth: AngularFireAuth, public router: Router) {
+  constructor(public afAuth: AngularFireAuth, public router: Router) {
     this.isLogged()
   }
 
   links: Array<{ text: string, path: string }>;
-
 
   ngOnInit(): void {
   }

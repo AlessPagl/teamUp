@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from '@angular/router';
 
@@ -14,7 +13,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(private authService: AuthService, public afAuth: AngularFireAuth, public router: Router) {
+  constructor(public afAuth: AngularFireAuth, public router: Router) {
     
     this.afAuth.signOut().then(()=>{this.afAuth.authState.subscribe((user) => {
       if (user!= null)

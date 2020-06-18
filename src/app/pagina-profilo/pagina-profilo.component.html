@@ -17,11 +17,22 @@
 
                 <h3>SKILLS</h3>
                 <textarea bind-disabled="isDisabled" rows="6" cols="25" type="text" style="color: black;"
-                    placeholder="Modifica con una beve descrizione" name="descrizione" required [(ngModel)]="teamMate.descrizione"></textarea>
+                    placeholder="Modifica con una beve descrizione" name="descrizione" required
+                    [(ngModel)]="teamMate.descrizione"></textarea>
             </div>
 
-            <div class="col-lg-6 mx-auto">
+            <div class="col-md-6 mx-auto">
+                <div class="row">
+                <div class="col-md-8">
                 <h2 class="text-white">{{teamMate.nome}} {{teamMate.cognome}}</h2>
+            </div>
+
+                <div class="col-md-2 ml-auto">
+                    <button type="button" class="btn btn-secondary" (click)="aggiungiProgetto()">Progetto</button>
+
+                </div>
+
+            </div>
 
                 <br>
 
@@ -30,8 +41,13 @@
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#informazioni">Informazioni</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#progetti">Progetti</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">Progetti</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item nav-link" data-toggle="tab" href="#teamMate">Team mate</a>
+                            <a class="dropdown-item nav-link" data-toggle="tab" href="#teamLeader">Team leader</a>
+                        </div>
                     </li>
                 </ul>
 
@@ -39,6 +55,7 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
+
                     <div class="tab-pane container active" id="informazioni">
 
                         <div class="row">
@@ -46,7 +63,9 @@
                                 <h5>Telefono:</h5>
                             </div>
                             <div class="col-md-8">
-                                <input bind-disabled="isDisabled" type="text" style="color: #0f1721;" value="{{teamMate.numero_telefono}}" name="numero_telefono" required [(ngModel)]="teamMate.numero_telefono">
+                                <input bind-disabled="isDisabled" type="text" style="color: #0f1721;"
+                                    value="{{teamMate.numero_telefono}}" name="numero_telefono" required
+                                    [(ngModel)]="teamMate.numero_telefono">
                             </div>
                         </div>
 
@@ -77,16 +96,40 @@
 
                         <div class="row">
                             <div class="col-md-2">
-                                <button type="button" class="btn btn-secondary" (click)="modificaProfilo()">{{testo}}</button>   
+                                <button type="button" class="btn btn-secondary"
+                                    (click)="modificaProfilo()">{{testo}}</button>
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <div *ngIf="aggProgetto==false" class="card" style="width: 18rem;">
+                            <div class="card-body">
+    
+                              <h5 class="card-title">Aggiungi Progetto</h5>
+                              
+                              <p class="card-text">Nome progetto: </p>
+                              <p class="card-text">Descrizione: </p>
+                              
+                            </div>
+                          </div>
+
+                    </div>
+
+                    <a href *ngIf="isDisabled==false" (click)="modificaPassword()">Cambia Password</a>
+
+                    <div class="tab-pane container fade" id="teamMate">
+
+                        <div class="rows">
+                            <div class="col-md-2">
+                                <app-idea-progetto></app-idea-progetto>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <a href *ngIf="isDisabled==false" (click)="modificaPassword()">Cambia Password</a>
-
-                    <div class="tab-pane container fade" id="progetti">...</div>
 
                 </div>
 

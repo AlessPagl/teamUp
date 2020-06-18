@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -17,7 +16,7 @@ export class PaginaProfiloComponent implements OnInit {
   public password = "";
   public credenziali = firebase.auth.EmailAuthProvider.credential(this.email, this.password);
 
-  constructor(public firestore: AngularFirestore, private authService: AuthService, public afAuth: AngularFireAuth, public router: Router) {
+  constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
 
     this.afAuth.authState.subscribe((user) => {
       if (user === null)
@@ -28,7 +27,7 @@ export class PaginaProfiloComponent implements OnInit {
 
   }
 
-  ngOnInit(){}
+  ngOnInit() { }
 
   async acquisizioneProfilo() {
 
@@ -57,20 +56,22 @@ export class PaginaProfiloComponent implements OnInit {
 
   }
 
- async modificaEmail() {
+  async modificaEmail() {
 
     (await this.afAuth.currentUser).updateEmail(this.email);
-    
-    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function() {
+
+    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function () {
       // User re-authenticated.
-    }).catch(function(error) {
+    }).catch(function (error) {
       // An error happened.
     });
 
-  } 
+  }
 
   public isDisabled = true;
   testo = "Modifica";
+
+  aggProgetto = true;
 
   modificaProfilo() {
     if (this.isDisabled === true) {
@@ -80,27 +81,40 @@ export class PaginaProfiloComponent implements OnInit {
     else {
       this.isDisabled = true;
       this.modificaValori(),
-      this.modificaEmail(),
-      this.testo = "Modifica";
+        this.modificaEmail(),
+        this.testo = "Modifica";
     }
   }
 
   async modificaPassword() {
-    
-    this.afAuth.sendPasswordResetEmail(this.email).then(function() {
 
-    }).catch(function(error) {
+    this.afAuth.sendPasswordResetEmail(this.email).then(function () {
+
+    }).catch(function (error) {
 
     });
 
-    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function() {
+    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function () {
       // Utente autenticato
-    }).catch(function(error) {
+    }).catch(function (error) {
       // Errore
     });
 
   }
 
 
+  aggiungiProgetto() {
+
+    if (this.aggProgetto === true) {
+
+      this.aggProgetto = false;
+
+    } else {
+
+      this.aggProgetto = true;
+
+    }
+
+  }
 
 }
