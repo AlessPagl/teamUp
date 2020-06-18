@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { IdeaProgettoComponent } from './idea-progetto/idea-progetto.component';
 import { AmministratoreComponent } from './amministratore/amministratore.component';
+import { RiepilogoProgettoComponent } from './riepilogo-progetto/riepilogo-progetto.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AmministratoreComponent } from './amministratore/amministratore.compone
     HomeComponent,
     NavbarComponent,
     IdeaProgettoComponent,
-    AmministratoreComponent
+    AmministratoreComponent,
+    RiepilogoProgettoComponent
   ],
 
   imports: [

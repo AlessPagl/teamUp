@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrazioneComponent } from './registrazione/registrazione.component';
 import { PaginaProfiloComponent } from './pagina-profilo/pagina-profilo.component';
+import { RiepilogoProgettoComponent } from './riepilogo-progetto/riepilogo-progetto.component'; 
 import { PaginaNonTrovataComponent } from './pagina-non-trovata/pagina-non-trovata.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "registrazione", component: RegistrazioneComponent },
   { path: "pagina-profilo", component: PaginaProfiloComponent },
+  { path: "riepilogo-progetto", component:RiepilogoProgettoComponent },
   { path: "**", component: PaginaNonTrovataComponent }
 ];
 
@@ -23,4 +25,5 @@ export class AppRoutingModule { }
 export const routingComponents = [HomeComponent,
                                   LoginComponent,
                                   RegistrazioneComponent,
-                                  PaginaProfiloComponent];
+                                  PaginaProfiloComponent,
+                                  RiepilogoProgettoComponent];
