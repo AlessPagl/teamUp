@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { IdeaProgettoComponent } from './idea-progetto/idea-progetto.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     PaginaProfiloComponent,
     PaginaNonTrovataComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    IdeaProgettoComponent
   ],
 
   imports: [
