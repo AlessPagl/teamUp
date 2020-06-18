@@ -12,7 +12,7 @@ import * as firebase from 'firebase';
 })
 export class PaginaProfiloComponent implements OnInit {
 
-  public teamMate = { citta: "", cognome: "", nome: "", numero_telefono: "", descrizione: "" };
+  public utente = { citta: "", cognome: "", nome: "", numero_telefono: "", descrizione: "" };
   public email = "";
   public password = "";
   public credenziali = firebase.auth.EmailAuthProvider.credential(this.email, this.password);
@@ -24,50 +24,48 @@ export class PaginaProfiloComponent implements OnInit {
         this.router.navigate(['/login']);
     });
 
-    this.acquisizioneProfilo().then(() => { console.log(this.teamMate) });
+    this.ngOnInit().then(() => { console.log(this.utente) });
 
   }
-
-  ngOnInit(){}
-
-  async acquisizioneProfilo() {
+  // 
+  async ngOnInit() {
 
     await this.afAuth.authState.subscribe((user) => {
       this.email = user.email;
-      this.firestore.collection("teamMate").doc(user.uid).get().forEach((user) => {
-        this.teamMate.nome = user.data().nome;
-        this.teamMate.cognome = user.data().cognome;
-        this.teamMate.citta = user.data().citta;
-        this.teamMate.numero_telefono = user.data().numero_telefono;
-        this.teamMate.descrizione = user.data().descrizione;
+      this.firestore.collection("Utente").doc(user.uid).get().forEach((user) => {
+        this.utente.nome = user.data().nome;
+        this.utente.cognome = user.data().cognome;
+        this.utente.citta = user.data().citta;
+        this.utente.numero_telefono = user.data().numero_telefono;
+        this.utente.descrizione = user.data().descrizione;
       });
     });
 
   }
 
-  async modificaValori() {
+  async modificheValori() {
 
     await this.afAuth.authState.subscribe((user) => {
 
-      this.firestore.collection("teamMate").doc(user.uid).set({
-        ...this.teamMate
+      this.firestore.collection("Utente").doc(user.uid).set({
+        ...this.utente
       });
 
     });
 
   }
 
- async modificaEmail() {
-
-    (await this.afAuth.currentUser).updateEmail(this.email);
-    
-    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function() {
-      // User re-authenticated.
-    }).catch(function(error) {
-      // An error happened.
-    });
-
-  } 
+  /*  async modificaEmail() {
+ 
+     (await this.afAuth.currentUser).updateEmail(this.email);
+     
+     (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function() {
+       // User re-authenticated.
+     }).catch(function(error) {
+       // An error happened.
+     });
+ 
+   } */
 
   public isDisabled = true;
   testo = "Modifica";
@@ -78,25 +76,26 @@ export class PaginaProfiloComponent implements OnInit {
       this.testo = "Salva";
     }
     else {
+      console.log(this.utente);
       this.isDisabled = true;
-      this.modificaValori(),
-      this.modificaEmail(),
-      this.testo = "Modifica";
+      this.modificheValori(),
+        /* this.modificaEmail(), */
+        this.testo = "Modifica";
     }
   }
 
   async modificaPassword() {
-    
-    this.afAuth.sendPasswordResetEmail(this.email).then(function() {
 
-    }).catch(function(error) {
+    this.afAuth.sendPasswordResetEmail(this.email).then(function () {
+
+    }).catch(function (error) {
 
     });
 
-    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function() {
-      // Utente autenticato
-    }).catch(function(error) {
-      // Errore
+    (await this.afAuth.currentUser).reauthenticateWithCredential(this.credenziali).then(function () {
+      // User re-authenticated.
+    }).catch(function (error) {
+      // An error happened.
     });
 
   }

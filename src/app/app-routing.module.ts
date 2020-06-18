@@ -5,11 +5,13 @@ import { LoginComponent } from './login/login.component';
 import { RegistrazioneComponent } from './registrazione/registrazione.component';
 import { PaginaProfiloComponent } from './pagina-profilo/pagina-profilo.component';
 import { PaginaNonTrovataComponent } from './pagina-non-trovata/pagina-non-trovata.component';
+import { AmministratoreComponent } from './amministratore/amministratore.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent }, 
   { path: "", redirectTo: "/login", pathMatch: "full" }, 
   { path: "login", component: LoginComponent },
+  { path: "Pro342", component: AmministratoreComponent },
   { path: "registrazione", component: RegistrazioneComponent },
   { path: "pagina-profilo", component: PaginaProfiloComponent },
   { path: "**", component: PaginaNonTrovataComponent }
@@ -22,5 +24,6 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents = [HomeComponent,
                                   LoginComponent,
+                                  AmministratoreComponent,
                                   RegistrazioneComponent,
                                   PaginaProfiloComponent];
