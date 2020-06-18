@@ -24,20 +24,10 @@ export class AuthService {
 
   }
 
-
-  async sendPasswordResetEmail(passwordResetEmail: string) {
-    return await this.afAuth.sendPasswordResetEmail(passwordResetEmail);
-  }
-
   async logout() {
     await this.afAuth.signOut();
     localStorage.removeItem('user');
     this.router.navigate(['admin/login']);
-  }
-
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null;
   }
 
 }
