@@ -28,17 +28,22 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#informazioni">Informazioni</a>
+                        <a class="nav-link" data-toggle="tab" href="#informazioni">Informazioni</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#progetti">Progetti</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Progetti</a>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item nav-link" data-toggle="tab" href="#teamMate">Team mate</a>
+                          <a class="dropdown-item" href="#">Team leader</a>
+                        </div>
+                      </li>
                 </ul>
 
                 <br>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
+
                     <div class="tab-pane container active" id="informazioni">
 
                         <div class="row">
@@ -86,7 +91,17 @@
 
                     <a href *ngIf="isDisabled==false" (click)="modificaPassword()">Cambia Password</a>
 
-                    <div class="tab-pane container fade" id="progetti">...</div>
+                    <div class="tab-pane container fade" id="teamMate">
+
+                        <div class="rows">
+                            <div class="col-md-2">
+                                <app-idea-progetto></app-idea-progetto>
+                            </div>
+
+                        </div>
+
+                    </div>
+
 
                 </div>
 
