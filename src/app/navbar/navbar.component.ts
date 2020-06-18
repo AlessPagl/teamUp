@@ -38,4 +38,10 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  async logout() {
+    await this.afAuth.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['admin/login']);
+  }
+
 }
