@@ -4,97 +4,142 @@
 
 <body>
 
-    <!-- FATTO DA ALESSIOOOOOOOOOOO -->
 
     <div class="container">
         <div class="row">
             <div class="col-md-3 text-white">
-                <div class="card" style="width: 200px; height: 200px;">
-                    <img class="card-img-top" src="https://randomuser.me/api/portraits/women/44.jpg"
+                <div class="card" style="width: 150px; height: 150px;">
+                    <img class="card-img-top" src="https://img.icons8.com/android/100/000000/user.png"
                         alt="Card image cap">
                     <div class="card-body">
                     </div>
                 </div>
 
                 <h3>SKILLS</h3>
-                <dl>
-                    Lorem ipsum dolor
-                    sit amet, consectetur adipisicing
-                    elit.
-                </dl>
+                <textarea bind-disabled="isDisabled" rows="6" cols="25" type="text" style="color: black;"
+                    placeholder="Modifica con una beve descrizione" name="descrizione" required
+                    [(ngModel)]="teamMate.descrizione"></textarea>
             </div>
 
-            <div class="col-lg-6 mx-auto">
-                <h2 class="text-white">{{utente.nome}} {{utente.cognome}}</h2>
+            <div class="col-md-6 mx-auto">
+                <div class="row">
+                <div class="col-md-8">
+                <h2 class="text-white">{{teamMate.nome}} {{teamMate.cognome}}</h2>
+            </div>
+
+                <div class="col-md-2 ml-auto">
+                    <button type="button" class="btn btn-secondary" (click)="aggiungiProgetto()">Progetto</button>
+
+                </div>
+
+            </div>
+
                 <br>
-                <ul class="nav nav-tabs text-white" role="tablist">
-                    <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab"
-                            class="border-white">Informazioni</a>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#informazioni">Informazioni</a>
                     </li>
-                    <li role="presentation"><a href="#progetti" aria-controls="progetti" role="tab" data-toggle="tab"
-                            class="border-white">Progetti</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">Progetti</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item nav-link" data-toggle="tab" href="#teamMate">Team mate</a>
+                            <a class="dropdown-item nav-link" data-toggle="tab" href="#teamLeader">Team leader</a>
+                        </div>
                     </li>
                 </ul>
 
-                <div class="tab-content text-white">
+                <br>
 
-                    <div role="tabpanel" class="tab-pane active" id="info">
-                        <h3>Informazioni</h3>
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    <div class="tab-pane container active" id="informazioni">
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <h4>Telefono:</h4>
+                            <div class="col-md-4 text-white">
+                                <h5>Telefono:</h5>
                             </div>
                             <div class="col-md-8">
-                                <input bind-disabled=false readonly="true" type="text" style="color: #0f1721;" value="{{utente.numero_telefono}}">
+                                <input bind-disabled="isDisabled" type="text" style="color: #0f1721;"
+                                    value="{{teamMate.numero_telefono}}" name="numero_telefono" required
+                                    [(ngModel)]="teamMate.numero_telefono">
                             </div>
                         </div>
 
-
                         <div class="row">
-                            <div class="col-md-4">
-                                <h4>Città di Residenza:</h4>
+                            <div class="col-md-4 text-white">
+                                <h5>Città:</h5>
                             </div>
                             <div class="col-md-8">
-                                <input bind-disabled=false type="text" style="color: black;" cols= "40">
+                                <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
+                                    value="{{teamMate.citta}}" name="citta" required [(ngModel)]="teamMate.citta">
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-4 text-white">
+                                <h5>Email</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
+                                    value="{{email}}" name="email" required [(ngModel)]="email">
+                            </div>
+
+                        </div>
+
+                        <br>
 
 
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <h4>CV:</h4>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-secondary"
+                                    (click)="modificaProfilo()">{{testo}}</button>
                             </div>
-                            <div class="col-lg-4">
-                                <textarea rows="3"  cols= "45"  type="text" style="color: black;">
-                                    </textarea>
-                            </div>
+
                         </div>
 
+                        <br>
 
-                        <!-- <a>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, at obcaecati. 
-                            Nemo blanditiis ducimus facilis illum et neque quibusdam ipsum odio unde natus labore 
-                            aliquid eius, ipsa iusto ad sequi!
-                        </a> -->
+                        <div *ngIf="aggProgetto==false" class="card" style="width: 18rem;">
+                            <div class="card-body">
+    
+                              <h5 class="card-title">Aggiungi Progetto</h5>
+                              
+                              <p class="card-text">Nome progetto: </p>
+                              <p class="card-text">Descrizione: </p>
+                              
+                            </div>
+                          </div>
+
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="progetti">
-                        <h3>Progetti</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nostrum error perferendis
-                            dolorem doloremque delectus animi inventore cum beatae, voluptatem id distinctio nobis
-                            laudantium aut illum ducimus temporibus pariatur non!</p>
+
+                    <a href *ngIf="isDisabled==false" (click)="modificaPassword()">Cambia Password</a>
+
+                    <div class="tab-pane container fade" id="teamMate">
+
+                        <div class="rows">
+                            <div class="col-md-2">
+                                <app-idea-progetto></app-idea-progetto>
+                            </div>
+
+                        </div>
+
                     </div>
+
 
                 </div>
-            </div>
 
-            <div class="col-md-2 ml-auto">
-                <button type="button" class="btn btn-secondary">Modifica</button>
             </div>
         </div>
+
     </div>
+
 
     <!-- FINE FATTO DA ALESSIOOOOOOOOOOO -->
 </body>
+
 </html>
