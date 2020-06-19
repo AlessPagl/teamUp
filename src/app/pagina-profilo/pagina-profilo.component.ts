@@ -16,6 +16,12 @@ export class PaginaProfiloComponent implements OnInit {
   public password = "";
   public credenziali = firebase.auth.EmailAuthProvider.credential(this.email, this.password);
 
+  public isDisabled = true;
+  public tastoModifica = "Modifica";
+
+  public aggProgetto = true;
+
+
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
 
     this.afAuth.authState.subscribe((user) => {
@@ -44,6 +50,8 @@ export class PaginaProfiloComponent implements OnInit {
 
   }
 
+  /* MODIFICA VALORI */
+
   async modificaValori() {
 
     await this.afAuth.authState.subscribe((user) => {
@@ -55,6 +63,8 @@ export class PaginaProfiloComponent implements OnInit {
     });
 
   }
+
+  /* MODIFICA EMAIL */
 
   async modificaEmail() {
 
@@ -68,23 +78,22 @@ export class PaginaProfiloComponent implements OnInit {
 
   }
 
-  public isDisabled = true;
-  testo = "Modifica";
-
-  aggProgetto = true;
+  /* MODIFICA PROFILO */
 
   modificaProfilo() {
     if (this.isDisabled === true) {
       this.isDisabled = false;
-      this.testo = "Salva";
+      this.tastoModifica = "Salva";
     }
     else {
       this.isDisabled = true;
       this.modificaValori(),
         this.modificaEmail(),
-        this.testo = "Modifica";
+        this.tastoModifica = "Modifica";
     }
   }
+
+  /* MODIFICA PASSWORD */
 
   async modificaPassword() {
 
@@ -102,10 +111,11 @@ export class PaginaProfiloComponent implements OnInit {
 
   }
 
+  /* AGGIUNGI PROGETTO */
 
   aggiungiProgetto() {
 
-    if (this.aggProgetto === true) {
+    if(this.aggProgetto == true) {
 
       this.aggProgetto = false;
 
@@ -116,5 +126,6 @@ export class PaginaProfiloComponent implements OnInit {
     }
 
   }
+
 
 }

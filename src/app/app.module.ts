@@ -18,7 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { IdeaProgettoComponent } from './idea-progetto/idea-progetto.component';
 import { AmministratoreComponent } from './amministratore/amministratore.component';
 import { RiepilogoProgettoComponent } from './riepilogo-progetto/riepilogo-progetto.component';
-
+import { ProgettoComponent } from './progetto/progetto.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { RiepilogoProgettoComponent } from './riepilogo-progetto/riepilogo-proge
     NavbarComponent,
     IdeaProgettoComponent,
     AmministratoreComponent,
-    RiepilogoProgettoComponent
+    RiepilogoProgettoComponent,
+    ProgettoComponent,
   ],
 
   imports: [

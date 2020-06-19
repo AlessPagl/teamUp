@@ -4,7 +4,6 @@
 
 <body>
 
-
     <div class="container">
         <div class="row">
             <div class="col-md-3 text-white">
@@ -17,23 +16,33 @@
                 </div>
 
                 <h3>SKILLS</h3>
+
                 <textarea bind-disabled="isDisabled" rows="6" cols="25" type="text" style="color: black;"
                     placeholder="Modifica con una beve descrizione" name="descrizione" required
-                    [(ngModel)]="teamMate.descrizione"></textarea>
+                    [(ngModel)]="teamMate.descrizione">
+                </textarea>
+
             </div>
 
-            <div class="col-md-6 mx-auto">
+            <div class="col-md-8 mx-auto">
+
                 <div class="row">
-                <div class="col-md-8">
-                <h2 class="text-white">{{teamMate.nome}} {{teamMate.cognome}}</h2>
-            </div>
 
-                <div class="col-md-2 ml-auto">
-                    <button type="button" class="btn btn-secondary" (click)="aggiungiProgetto()">Progetto</button>
+                    <div class="col-md-8">
+                        <h2 class="text-white">{{teamMate.nome}} {{teamMate.cognome}}</h2>
+                    </div>
+
+                    <div class="col-md-4 ml-auto">
+
+                        <div *ngIf="aggProgetto==true" class="col-md-8 ml-auto">
+                            <button type="button" class="btn btn-secondary"
+                                (click)="aggiungiProgetto()">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Progetto</button>
+                        </div>
+
+                    </div>
 
                 </div>
-
-            </div>
 
                 <br>
 
@@ -64,9 +73,9 @@
                                 <h5>Telefono:</h5>
                             </div>
                             <div class="col-md-8">
-                                <input bind-disabled="isDisabled" type="text" style="color: #0f1721;"
-                                    value="{{teamMate.numero_telefono}}" name="numero_telefono" required
-                                    [(ngModel)]="teamMate.numero_telefono">
+                                <input bind-disabled="isDisabled" type="tel" style="color: #0f1721;"
+                                    value="{{teamMate.numero_telefono}}" name="numero_telefono"
+                                    [(ngModel)]="teamMate.numero_telefono" required>
                             </div>
                         </div>
 
@@ -76,7 +85,7 @@
                             </div>
                             <div class="col-md-8">
                                 <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
-                                    value="{{teamMate.citta}}" name="citta" required [(ngModel)]="teamMate.citta">
+                                    value="{{teamMate.citta}}" name="citta" [(ngModel)]="teamMate.citta" required>
                             </div>
                         </div>
 
@@ -86,19 +95,18 @@
                             </div>
                             <div class="col-md-8">
                                 <input bind-disabled="isDisabled" type="text" style="color: black;" cols="40"
-                                    value="{{email}}" name="email" required [(ngModel)]="email">
+                                    value="{{email}}" name="email" [(ngModel)]="email" required>
                             </div>
 
                         </div>
 
                         <br>
 
-
-
                         <div class="row">
+
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-secondary"
-                                    (click)="modificaProfilo()">{{testo}}</button>
+                                    (click)="modificaProfilo()">{{tastoModifica}}</button>
                             </div>
 
                         </div>
@@ -109,29 +117,15 @@
 
                     <a href *ngIf="isDisabled==false" (click)="modificaPassword()">Cambia Password</a>
 
-                    <div class="tab-pane container fade" id="teamMate">
-
-                        <div class="rows">
-                            <div class="col-md-2">
-                                <app-idea-progetto></app-idea-progetto>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
                 </div>
 
                 <div *ngIf="aggProgetto==false" class="tab-content">
 
                     <div class="tab-pane container active">
 
-                        <h1 class="text-white">PROVA</h1>
+                        <app-progetto></app-progetto>
 
                     </div>
-
-
 
                 </div>
 
@@ -139,7 +133,6 @@
         </div>
 
     </div>
-
 
     <!-- FINE FATTO DA ALESSIOOOOOOOOOOO -->
 </body>
