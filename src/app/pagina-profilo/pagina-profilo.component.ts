@@ -81,6 +81,7 @@ export class PaginaProfiloComponent implements OnInit {
   /* MODIFICA PROFILO */
 
   modificaProfilo() {
+    console.log("QUI")
     if (this.isDisabled === true) {
       this.isDisabled = false;
       this.tastoModifica = "Salva";

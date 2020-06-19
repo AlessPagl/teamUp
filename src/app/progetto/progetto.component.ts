@@ -15,9 +15,10 @@ export class ProgettoComponent implements OnInit {
 
   valoreProgetto: boolean;
 
-  /* @Input() public aggiungiProgetto: Function; */
+  @Input() aggiungiProgetto: Function;
 
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
+    console.log(this.aggiungiProgetto)
 
   }
 
@@ -28,15 +29,13 @@ export class ProgettoComponent implements OnInit {
 
     this.afAuth.authState.subscribe(user => {
       this.progetto.utente = user.uid;
-      console.log(this.progetto)
-
       this.firestore.collection("Progetto").add({
 
         ...this.progetto
   
       })
 
-      /* .then(() => this.aggiungiProgetto(this.aggProgetto)) */
+      .then(() => {window.location.reload();})
 
     })
 
