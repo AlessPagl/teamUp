@@ -13,13 +13,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(public afAuth: AngularFireAuth, public router: Router) {
-    
-    this.afAuth.signOut().then(()=>{this.afAuth.authState.subscribe((user) => {
-      if (user!= null)
-        this.router.navigate(['/home']);
-    })});
- 
+  constructor(public afAuth: AngularFireAuth, public router: Router) {  
+    this.afAuth.signOut();
   }
 
   public teamMate = { email: "", password: "" };

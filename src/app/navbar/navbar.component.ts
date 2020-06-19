@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { HomeComponent } from '../home/home.component';
-import { LoginComponent } from '../login/login.component';
-import { RegistrazioneComponent } from '../registrazione/registrazione.component';
+import { ValueService } from '../value.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,15 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  public logged = false;
 
-  constructor(public afAuth: AngularFireAuth, public router: Router) {
-    this.isLogged()
+  public logged = false;
+  valore: boolean;
+
+  constructor(public afAuth: AngularFireAuth, public router: Router, private valueservice: ValueService) {
+    this.isLogged();
   }
 
   links: Array<{ text: string, path: string }>;
 
   ngOnInit(): void {
+
   }
 
   /* PER CHIAMARE ID UTENTE */
@@ -34,6 +35,8 @@ export class NavbarComponent implements OnInit {
         this.logged = true
       }
     })
+
+    this.valueservice.cast.subscribe(data => this.valore = data);
   }
 
   async logout() {
