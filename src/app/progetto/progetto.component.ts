@@ -11,14 +11,11 @@ import { Router } from '@angular/router';
 export class ProgettoComponent implements OnInit {
 
   public progetto = { nome: "", descrizione: "", genere: "", num_partecipanti: "", utente: "" };
-  aggProgetto = false;
 
-  valoreProgetto: boolean;
-
-  @Input() aggiungiProgetto: Function;
+  public window;
+  
 
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
-    console.log(this.aggiungiProgetto)
 
   }
 
@@ -39,6 +36,12 @@ export class ProgettoComponent implements OnInit {
 
     })
 
+
+  }
+
+  tornaIndietro() {
+
+    window.location.reload()
 
   }
 

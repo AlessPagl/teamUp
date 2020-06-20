@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RiepilogoProgettoComponent implements OnInit {
 
+  public riepilogo ={titolo:"", descrizione:"", data:"" };
+  public isDisabled = true;
+
   constructor() { }
 
   ngOnInit(): void {

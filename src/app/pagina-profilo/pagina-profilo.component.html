@@ -62,9 +62,16 @@
                 </ul>
 
                 <br>
+                
 
                 <!-- Tab panes -->
                 <div *ngIf="aggProgetto==true" class="tab-content">
+                    <!-- Aggiungere qui altri contenuti dei tab -->
+                    <div class="tab-pane container text-white fade" id="teamMate">DIOCANE</div>
+
+                    <div class="tab-pane container" id="teamMate">
+                        <a>CIAO1</a>
+                    </div>
 
                     <div class="tab-pane container active" id="informazioni">
 
@@ -116,14 +123,14 @@
                     </div>
 
                     <a href *ngIf="isDisabled==false" (click)="modificaPassword()">Cambia Password</a>
-
+                    <!-- Aggiungere qui altri contenuti dei tab -->
                 </div>
 
                 <div *ngIf="aggProgetto==false" class="tab-content">
 
                     <div class="tab-pane container active">
 
-                        <app-progetto [aggiungiProgetto] = "aggiungiProgetto"></app-progetto>
+                        <app-progetto></app-progetto>
 
                     </div>
 
