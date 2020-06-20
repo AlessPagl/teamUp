@@ -10,10 +10,12 @@
     </div>
     <div class="container" *ngFor="let progetto of progetti">
         <div class="card">
-            <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}</h5>
+            <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}                                                       
+                <h6>Team leader</h6>
+            </h5>
             <div class="card-body">
                 <ul>
-                    <li >
+                    <li>
                         Genere: {{progetto.genere}}
                     </li>
                     <li>
@@ -25,8 +27,8 @@
                 </ul>
 
                 <!-- <div class="ml-auto w-25">
-                    <button type="submit" class="btn btn-primary">Registrati</button>
-                </div> -->
+                    <button type="submit" class="btn btn-primary">Partecipa</button>
+                    </div> -->
             </div>
             <br>
         </div>
