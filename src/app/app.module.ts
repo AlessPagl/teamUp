@@ -15,7 +15,6 @@ import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { IdeaProgettoComponent } from './idea-progetto/idea-progetto.component';
 import { AmministratoreComponent } from './amministratore/amministratore.component';
 import { RiepilogoProgettoComponent } from './riepilogo-progetto/riepilogo-progetto.component';
 import { ProgettoComponent } from './progetto/progetto.component';
@@ -30,7 +29,6 @@ import { ProgettoComponent } from './progetto/progetto.component';
     PaginaNonTrovataComponent,
     HomeComponent,
     NavbarComponent,
-    IdeaProgettoComponent,
     AmministratoreComponent,
     RiepilogoProgettoComponent,
     ProgettoComponent,

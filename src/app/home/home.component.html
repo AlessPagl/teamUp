@@ -3,7 +3,35 @@
 <head></head>
 
 <body>
+    <div class="b">
+        <h2>Progetti</h2>
+        <br>
+        <br>
+    </div>
+    <div class="container" *ngFor="let progetto of progetti">
+        <div class="card">
+            <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}</h5>
+            <div class="card-body">
+                <ul>
+                    <li >
+                        Genere: {{progetto.genere}}
+                    </li>
+                    <li>
+                        Descrizione: {{progetto.descrizione}}
+                    </li>
+                    <li>
+                        Numero Partecipanti Richiesto: {{progetto.num_partecipanti}}
+                    </li>
+                </ul>
 
+                <!-- <div class="ml-auto w-25">
+                    <button type="submit" class="btn btn-primary">Registrati</button>
+                </div> -->
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
 
 </body>
 
