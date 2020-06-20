@@ -39,10 +39,15 @@ export class NavbarComponent implements OnInit {
     this.valueservice.cast.subscribe(data => this.valore = data);
   }
 
-  async logout() {
+  async logoutUser() {
     await this.afAuth.signOut();
     localStorage.removeItem('user');
-    this.router.navigate(['admin/login']);
+    this.router.navigate(['/login']);
+  }
+
+   logoutAdmin() {
+    this.valore = false;
+    this.router.navigate(['/Pro342']);
   }
 
 }
