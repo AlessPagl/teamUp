@@ -9,10 +9,9 @@
             <div class="col-md-3 text-white">
 
                 <div class="card" style="width: 150px; height: 150px;">
-                    <img class="card-img-top" src="https://img.icons8.com/android/100/000000/user.png"
-                        alt="Card image cap">
-                    <div class="card-body">
-                    </div>
+
+                    <img class="card-img-top" src="https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/55096766-icona-utente-maschile-isolato-su-uno-sfondo-bianco-conto-avatar-per-il-web-user-immagine-del-profilo.jpg?ver=6">
+
                 </div>
 
                 <h3>SKILLS</h3>
@@ -35,8 +34,7 @@
                     <div class="col-md-4 ml-auto">
 
                         <div *ngIf="aggProgetto==true" class="col-md-8 ml-auto">
-                            <button type="button" class="btn btn-secondary"
-                                (click)="aggiungiProgetto()">
+                            <button type="button" class="btn btn-secondary" (click)="aggiungiProgetto()">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Progetto</button>
                         </div>
 
@@ -62,15 +60,13 @@
                 </ul>
 
                 <br>
-                
+
 
                 <!-- Tab panes -->
                 <div *ngIf="aggProgetto==true" class="tab-content">
                     <!-- Aggiungere qui altri contenuti dei tab -->
-                    <div class="tab-pane container text-white fade" id="teamMate">DIOCANE</div>
-
                     <div class="tab-pane container" id="teamMate">
-                        <a>CIAO1</a>
+                        <app-riepilogo-progetto></app-riepilogo-progetto>
                     </div>
 
                     <div class="tab-pane container active" id="informazioni">
