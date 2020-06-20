@@ -28,8 +28,15 @@
                             </div>
 
                             <div class="tab-pane fade" id="riepilogo">
-                                <div class="col-md-4">
-                                    <a>riepilogo</a> 
+                                <div class="row">
+                                    <div class="col-md-4 text-white">
+                                        <h3>Titolo:</h3>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input bind-disabled="isDisabled"  style="color: #0f1721;"
+                                            value="{{riepilogo.titolo}}" name="titolo"
+                                            [(ngModel)]="riepilogo.titolo" required>
+                                    </div>
                                 </div>
                             </div>
                         </div>                   
