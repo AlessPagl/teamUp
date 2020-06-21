@@ -12,12 +12,16 @@ class progetto {
   public genere;
   public num_partecipanti;
   public descrizione;
+  public nomeTeamLeader;
+  public cognomeTeamLeader;
 
-  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione) {
+  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader) {
     this.nome = nome;
     this.genere = genere;
     this.num_partecipanti = num_partecipanti;
     this.descrizione = descrizione;
+    this.nomeTeamLeader = nomeTeamLeader;
+    this.cognomeTeamLeader = cognomeTeamLeader;
   }
 
 }
@@ -33,7 +37,11 @@ export class HomeComponent implements OnInit {
   public id;
   isAdmin: boolean;
   accesso: boolean;
+  prelievo: boolean;
+  idTeamLeader: string;
   public progetti: progetto[];
+  nomeTL: string;
+  cognomeTL: string;
 
 
 
@@ -59,16 +67,33 @@ export class HomeComponent implements OnInit {
 
   AcquisizioneProgetti() {
 
+
+
     this.firestore.collection("Progetto").get().forEach((projs) => {
       projs.forEach((proj) => {
-        if (this.progetti != undefined) {
-          this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione));
-        }
-        else {
-          this.progetti= [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione)];
-        }
+
+        this.afAuth.authState.forEach((users) => { 
+          this.idTeamLeader = users.uid;
+          if (proj.data().teamLeader === this.idTeamLeader)
+          {
+            this.firestore.collection("teamMate").doc(users.uid).get().forEach((user) => {
+              this.nomeTL = user.data().nome;
+              this.cognomeTL = user.data().cognome;
+            });
+          }
+        
+          if (this.progetti != undefined) {
+            this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione, this.nomeTL, this.cognomeTL));
+          }
+          else {
+            this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione, this.nomeTL, this.cognomeTL)];
+          } this.afAuth.authState.subscribe(user => {
+            this.idTeamLeader = user.uid;
+          });
+        
       }
       )
+    });
     });
 
   }
