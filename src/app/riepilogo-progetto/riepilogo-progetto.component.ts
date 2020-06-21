@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-riepilogo-progetto',
@@ -7,12 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RiepilogoProgettoComponent implements OnInit {
 
-  public riepilogo ={titolo:"", descrizione:"", data:"" };
+  public riepilogo ={AndamentoProgetto:"", data:"" };
   public isDisabled = true;
+  public tastoModifica = "Modifica";
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) { }
+
+  ngOnInit(): void {  }
+
+  async modificaValori() {
+
+    await this.afAuth.authState.subscribe((user) => {
+
+      this.firestore.collection("riepilogo").doc(user.uid).set({
+        ...this.riepilogo
+      });
+
+    });
+
+  }
+  modificaRiepilogo() {
+    console.log("QUI")
+    if (this.isDisabled === true) {
+      this.isDisabled = false;
+      this.tastoModifica = "Salva";
+    }
+    else {
+      this.isDisabled = true;
+      this.modificaValori(),
+        this.tastoModifica = "Modifica";
+    }
   }
 
 }
