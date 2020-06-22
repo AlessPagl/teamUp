@@ -24,7 +24,6 @@ class progetto {
     this.nomeTeamLeader = nomeTeamLeader;
     this.cognomeTeamLeader = cognomeTeamLeader;
     this.partecipa = partecipa;
-    console.log(partecipa, this.partecipa)
   }
 
 }
