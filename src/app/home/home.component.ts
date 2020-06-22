@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   public progetti: progetto[];
   nomeTL: string;
   cognomeTL: string;
-  
+
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
 
@@ -78,6 +78,7 @@ export class HomeComponent implements OnInit {
             this.firestore.collection("teamMate").doc(users.uid).get().forEach((user) => {
               this.nomeTL = user.data().nome;
               this.cognomeTL = user.data().cognome;
+              console.log(this.nomeTL)
             });
           }
         
