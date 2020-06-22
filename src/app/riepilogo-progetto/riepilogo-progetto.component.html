@@ -4,10 +4,11 @@
 
 <body>
     <div class="container">
-        <div class="row">
+        <div *ngFor="let progetto of progetti" class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <h5 class="card-header" style="background-color: #223449; color: white;">Progetto</h5>
+                    <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}</h5>
+
                     <div class="card-body">
 
                         <!-- TABS  -->
@@ -18,15 +19,18 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#candidature">Candidature</a>
+                                <a class="nav-link" data-toggle="tab" href="#{{progetto.nome}}+riepilogo">Riepilogo</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#riepilogo">Riepilogo</a>
+                                <a class="nav-link" data-toggle="tab" href="#candidature">Candidature</a>
                             </li>
+
+
 
                         </ul>
 
+                        <!-- CONTENUTO CARD -->
 
                         <div class="tab-content ">
                             <div class="tab-pane fade active show" id="descrizione">
@@ -37,7 +41,7 @@
 
                             <br>
 
-                            <div class="tab-pane fade" id="riepilogo">
+                            <div class="tab-pane fade" id="#{{progetto.nome}}+riepilogo">
 
 
                                 <div class="row">
@@ -46,7 +50,7 @@
                                     </div>
 
                                     <div class="col-md-8">
-                                        <textarea bind-disabled="isDisabled" rows="6" cols="25" type="text"
+                                        <textarea bind-disabled="isDisabled" rows="6" cols="40" type="text"
                                             style="color: black;" placeholder="Modifica con una beve descrizione"
                                             value="{{riepilogo.AvanzamentoProgetto}}" name="AvanzamentoProgetto"
                                             [(ngModel)]="riepilogo.AvanzamentoProgetto" required>
@@ -55,15 +59,18 @@
 
                                 </div>
 
+                                <br>
+
                                 <div class="row">
                                     <div class="col-md-4 ">
                                         <a>Data:</a>
                                     </div>
                                     <div class="col-md-8">
-                                        <input bind-disabled="true" style="color: #0f1721;" value="{{dataRiepilogo}}"
-                                            name="data" [(ngModel)]="dataRiepilogo" required>
+                                        <a>{{dataRiepilogo}}</a>
                                     </div>
                                 </div>
+
+                                <br>
 
                                 <div class="row">
 
@@ -73,12 +80,16 @@
                                     </div>
 
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                     <br>
                 </div>
+                <br>
             </div>
+
         </div>
 
     </div>
