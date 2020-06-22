@@ -42,8 +42,7 @@ export class HomeComponent implements OnInit {
   public progetti: progetto[];
   nomeTL: string;
   cognomeTL: string;
-
-
+  
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
 
