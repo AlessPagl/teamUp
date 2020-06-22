@@ -39,16 +39,18 @@
 
                             <div class="tab-pane fade" id="riepilogo">
 
-                                
+
                                 <div class="row">
                                     <div class="col-md-4 ">
                                         <a>Avanzamento Progetto:</a>
                                     </div>
 
                                     <div class="col-md-8">
-                                        <input bind-disabled="isDisabled"  style="color: #0f1721;"
+                                        <textarea bind-disabled="isDisabled" rows="6" cols="25" type="text"
+                                            style="color: black;" placeholder="Modifica con una beve descrizione"
                                             value="{{riepilogo.AvanzamentoProgetto}}" name="AvanzamentoProgetto"
                                             [(ngModel)]="riepilogo.AvanzamentoProgetto" required>
+                                        </textarea>
                                     </div>
 
                                 </div>
@@ -58,9 +60,8 @@
                                         <a>Data:</a>
                                     </div>
                                     <div class="col-md-8">
-                                        <input bind-disabled="isDisabled"  style="color: #0f1721;"
-                                            value="{{riepilogo.data}}" name="data"
-                                            [(ngModel)]="riepilogo.data" required>
+                                        <input bind-disabled="true" style="color: #0f1721;" value="{{dataRiepilogo}}"
+                                            name="data" [(ngModel)]="dataRiepilogo" required>
                                     </div>
                                 </div>
 
@@ -70,10 +71,10 @@
                                         <button type="button" class="btn btn-secondary"
                                             (click)="modificaRiepilogo()">{{tastoModifica}}</button>
                                     </div>
-        
+
                                 </div>
                             </div>
-                        </div>                   
+                        </div>
                     </div>
                     <br>
                 </div>
