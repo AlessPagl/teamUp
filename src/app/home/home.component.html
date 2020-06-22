@@ -8,31 +8,63 @@
         <br>
         <br>
     </div>
-    <div class="container" *ngFor="let progetto of progetti">
-        <div class="card">
-            <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}                                                       
-                <h6 class="text-white">Team Leader: {{progetto.nomeTeamLeader}} {{progetto.cognomeTeamLeader}}</h6>
-            </h5>
-            <div class="card-body">
-                <ul>
-                    <li>
-                        Genere: {{progetto.genere}}
-                    </li>
-                    <li>
-                        Descrizione: {{progetto.descrizione}}
-                    </li>
-                    <li>
-                        Numero Partecipanti Richiesto: {{progetto.num_partecipanti}}
-                    </li>
-                </ul>
+    <!-- <div *ngIf="logged === false">
+        <div class="container" *ngFor="let progetto of progetti">
+            <div class="card">
+                <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}
+                    <h6 class="text-white">Team Leader: {{progetto.nomeTeamLeader}} {{progetto.cognomeTeamLeader}}</h6>
+                </h5>
+                <div class="card-body">
+                    <ul>
+                        <li>
+                            Genere: {{progetto.genere}}
+                        </li>
+                        <li>
+                            Descrizione: {{progetto.descrizione}}
+                        </li>
+                        <li>
+                            Numero Partecipanti Richiesto: {{progetto.num_partecipanti}}
+                        </li>
+                    </ul>
 
-                <div class="ml-auto w-25">
-                    <button *ngIf= "progetto.partecipa === true"type="submit" class="btn btn-secondary" >Partecipa</button>
+                    <div class="ml-auto w-25">
+                        <button type="submit" class="btn btn-secondary">Elimina</button>
                     </div>
+                </div>
+                <br>
             </div>
             <br>
         </div>
-        <br>
+    </div> -->
+    <div>
+        <div class="container" *ngFor="let progetto of progetti">
+            <div class="card">
+                <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}
+                    <h6 class="text-white">Team Leader: {{progetto.nomeTeamLeader}} {{progetto.cognomeTeamLeader}}</h6>
+                </h5>
+                <div class="card-body">
+                    <ul>
+                        <li>
+                            Genere: {{progetto.genere}}
+                        </li>
+                        <li>
+                            Descrizione: {{progetto.descrizione}}
+                        </li>
+                        <li>
+                            Numero Partecipanti: {{progetto.num_teamMate}}/{{progetto.num_partecipanti}}
+                        </li>
+                    </ul>
+
+                    <div class="ml-auto w-25">
+                        <button *ngIf="progetto.partecipa === true && logged === true" type="submit"
+                            class="btn btn-secondary">Partecipa</button>
+                        <button *ngIf="logged === false" type="submit" class="btn btn-secondary">Elimina</button>   
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+        </div>
     </div>
 
 </body>

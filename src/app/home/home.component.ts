@@ -11,15 +11,17 @@ class progetto {
   public nome;
   public genere;
   public num_partecipanti;
+  public num_teamMate;
   public descrizione;
   public nomeTeamLeader;
   public cognomeTeamLeader;
   public partecipa;
 
-  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa ) {
+  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti,@Inject(String) num_teamMate, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa) {
     this.nome = nome;
     this.genere = genere;
     this.num_partecipanti = num_partecipanti;
+    this.num_teamMate = num_teamMate;
     this.descrizione = descrizione;
     this.nomeTeamLeader = nomeTeamLeader;
     this.cognomeTeamLeader = cognomeTeamLeader;
@@ -45,6 +47,7 @@ export class HomeComponent implements OnInit {
   nomeTL: string;
   cognomeTL: string;
   partecipa: boolean;
+  public logged = false;
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
 
@@ -58,6 +61,11 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/login']);
       }
 
+      if (user != null) {
+        this.logged = true;
+      }
+
+
     });
 
   }
@@ -69,31 +77,32 @@ export class HomeComponent implements OnInit {
   AcquisizioneProgetti() {
 
     this.afAuth.authState.subscribe((users) => {
-      this.idTeamLeader = users.uid;
+      if (users != null) {
+        this.idTeamLeader = users.uid;
+      }
       this.firestore.collection("Progetto").get().forEach((projs) => {
         projs.forEach((proj) => {
           this.firestore.collection("teamMate").doc(proj.data().teamLeader).get().forEach((user) => {
             this.nomeTL = user.data().nome;
             this.cognomeTL = user.data().cognome;
-              if (proj.data().teamLeader === this.idTeamLeader) {
-                this.partecipa = false
-              }
-              else
-              {
-                this.partecipa = true
-              }
-  
-            if (this.progetti != undefined) {
-              this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa));
+            if (proj.data().teamLeader === this.idTeamLeader) {
+              this.partecipa = false
             }
             else {
-              this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa)];
-            } 
+              this.partecipa = true
+            }
+
+            if (this.progetti != undefined) {
+              this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa));
+            }
+            else {
+              this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa)];
+            }
           }
           )
         });
       });
-  
+
     })
   }
 }
