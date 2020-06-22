@@ -10,35 +10,47 @@
                     <h5 class="card-header" style="background-color: #223449; color: white;">Progetto</h5>
                     <div class="card-body">
 
+                        <!-- TABS  -->
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#descrizione">Descrizione</a>
 
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#candidature">Candidature</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#riepilogo">Riepilogo</a>
                             </li>
 
                         </ul>
+
+
                         <div class="tab-content ">
                             <div class="tab-pane fade active show" id="descrizione">
                                 <div class="col-md-4">
                                     <a>descrizione</a>
                                 </div>
                             </div>
+
                             <br>
+
                             <div class="tab-pane fade" id="riepilogo">
 
                                 
                                 <div class="row">
                                     <div class="col-md-4 ">
-                                        <a>Andamento Progetto:</a>
+                                        <a>Avanzamento Progetto:</a>
                                     </div>
+
                                     <div class="col-md-8">
                                         <input bind-disabled="isDisabled"  style="color: #0f1721;"
-                                            value="{{riepilogo.AndamentoProgetto}}" name="AndamentoProgetto"
+                                            value="{{riepilogo.AndamentoProgetto}}" name="AvanzamentoProgetto"
                                             [(ngModel)]="riepilogo.AndamentoProgetto" required>
                                     </div>
+
                                 </div>
 
                                 <div class="row">

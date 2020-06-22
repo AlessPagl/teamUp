@@ -14,14 +14,17 @@ class progetto {
   public descrizione;
   public nomeTeamLeader;
   public cognomeTeamLeader;
+  public partecipa;
 
-  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader) {
+  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa ) {
     this.nome = nome;
     this.genere = genere;
     this.num_partecipanti = num_partecipanti;
     this.descrizione = descrizione;
     this.nomeTeamLeader = nomeTeamLeader;
     this.cognomeTeamLeader = cognomeTeamLeader;
+    this.partecipa = partecipa;
+    console.log(partecipa, this.partecipa)
   }
 
 }
@@ -42,7 +45,7 @@ export class HomeComponent implements OnInit {
   public progetti: progetto[];
   nomeTL: string;
   cognomeTL: string;
-
+  partecipa: boolean;
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
 
@@ -66,37 +69,32 @@ export class HomeComponent implements OnInit {
 
   AcquisizioneProgetti() {
 
-
-
-    this.firestore.collection("Progetto").get().forEach((projs) => {
-      projs.forEach((proj) => {
-
-        this.afAuth.authState.forEach((users) => { 
-          this.idTeamLeader = users.uid;
-          if (proj.data().teamLeader === this.idTeamLeader)
-          {
-            this.firestore.collection("teamMate").doc(users.uid).get().forEach((user) => {
-              this.nomeTL = user.data().nome;
-              this.cognomeTL = user.data().cognome;
-              console.log(this.nomeTL)
-            });
+    this.afAuth.authState.subscribe((users) => {
+      this.idTeamLeader = users.uid;
+      this.firestore.collection("Progetto").get().forEach((projs) => {
+        projs.forEach((proj) => {
+          this.firestore.collection("teamMate").doc(proj.data().teamLeader).get().forEach((user) => {
+            this.nomeTL = user.data().nome;
+            this.cognomeTL = user.data().cognome;
+              if (proj.data().teamLeader === this.idTeamLeader) {
+                this.partecipa = false
+              }
+              else
+              {
+                this.partecipa = true
+              }
+  
+            if (this.progetti != undefined) {
+              this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa));
+            }
+            else {
+              this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa)];
+            } 
           }
-        
-          if (this.progetti != undefined) {
-            this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione, this.nomeTL, this.cognomeTL));
-          }
-          else {
-            this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().descrizione, this.nomeTL, this.cognomeTL)];
-          } this.afAuth.authState.subscribe(user => {
-            this.idTeamLeader = user.uid;
-          });
-        
-      }
-      )
-    });
-    });
-
+          )
+        });
+      });
+  
+    })
   }
-
-
 }

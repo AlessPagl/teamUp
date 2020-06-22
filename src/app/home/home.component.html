@@ -11,7 +11,7 @@
     <div class="container" *ngFor="let progetto of progetti">
         <div class="card">
             <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}                                                       
-                <h6 class="text-white">Team Leader: {{nomeTL}} {{cognomeTL}}</h6>
+                <h6 class="text-white">Team Leader: {{progetto.nomeTeamLeader}} {{progetto.cognomeTeamLeader}}</h6>
             </h5>
             <div class="card-body">
                 <ul>
@@ -27,7 +27,7 @@
                 </ul>
 
                 <div class="ml-auto w-25">
-                    <button type="submit" class="btn btn-secondary">Partecipa</button>
+                    <button *ngIf= "progetto.partecipa === true"type="submit" class="btn btn-secondary" >Partecipa</button>
                     </div>
             </div>
             <br>

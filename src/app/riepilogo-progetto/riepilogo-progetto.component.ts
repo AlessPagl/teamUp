@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 })
 export class RiepilogoProgettoComponent implements OnInit {
 
-  public riepilogo ={AndamentoProgetto:"", data:"" };
+  public riepilogo ={AvanzamentoProgetto:"", data: "" };
   public isDisabled = true;
   public tastoModifica = "Modifica";
 
@@ -25,6 +25,7 @@ export class RiepilogoProgettoComponent implements OnInit {
     await this.afAuth.authState.subscribe((user) => {
 
       this.firestore.collection("riepilogo").doc(user.uid).set({
+      
         ...this.riepilogo
       });
 
