@@ -7,7 +7,7 @@
         <div *ngFor="let progetto of progetti" class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}
+                    <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}                        
                         <p *ngIf="progetto.stato === 'aperto'" class="text-success font-italic font-weight-light">
                             {{progetto.stato}}
                         </p>
@@ -22,22 +22,25 @@
                         <ul class="nav nav-tabs" id="{{progetto.nome}}">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" (click)="changeTabToDes(progetto.nome)"
-                                    href="#progetto.id_descrizione">Descrizione</a>
+                                    href="#{{progetto.id_descrizione}}">Descrizione</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" (click)="changeTabToRiep(progetto.nome)" href="#progetto.id_riepilogo">Riepilogo</a>
+                                <a class="nav-link" data-toggle="tab" (click)="changeTabToRiep(progetto.nome)"
+                                    href="#{{progetto.id_riepilogo}}">Riepilogo</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" (click)="changeTabToCand(progetto.nome)" href="#progetto.id_candidature">Candidature</a>
+                                <a class="nav-link" data-toggle="tab" (click)="changeTabToCand(progetto.nome)"
+                                    href="#{{progetto.id_candidatura}}">Candidature</a>
                             </li>
                         </ul>
 
                         <!-- CONTENUTO CARD -->
 
                         <div class="tab-content ">
-                            <div *ngIf="tabDes === progetto.id_descrizione" class="tab-pane fade active show" id="progetto.id_descrizione">
+                            <div *ngIf="tab === progetto.id_descrizione" class="tab-pane fade active show"
+                                id="{{progetto.id_descrizione}}">
                                 <br>
                                 <div class="row">
                                     <div class="col-md-7 ">
@@ -63,16 +66,22 @@
                                         <a class="font-weight-bold">Data:</a> <a> {{progetto.dataProgetto}}</a>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <div class="ml-auto w-25">
+                                        <button *ngIf="progetto.stato === 'aperto' && conferma === false" (click)="chiudiProgetto(progetto.idProgetto)" type="button" class="btn btn-secondary"
+                                            >Chiudi Progetto</button>
+                                        <a *ngIf="conferma === true" class="font-weight-bold text-danger">Progetto chiuso correttamente</a>    
+                                    </div>
+                                </div>
                             </div>
 
                             <br>
 
-                            <div *ngIf="tabRie === progetto.id_riepilogo" class="tab-pane fade" id="progetto.id_riepilogo">
-
-
+                            <div *ngIf="tab === progetto.id_riepilogo" class="tab-pane fade" id="{{progetto.id_riepilogo}}">
                                 <div class="row">
                                     <div class="col-md-4 ">
-                                        <a class="font-weight-bold" name="progetto.id_riepilogo">Avanzamento Progetto:</a>
+                                        <a class="font-weight-bold">Avanzamento Progetto:</a>
                                     </div>
 
                                     <div class="col-md-8">
@@ -88,8 +97,8 @@
                                 <br>
 
                                 <div class="row">
-                                    <div class=""col-md-4 >
-                                        <a class="font-weight-bold">Data:</a>
+                                    <div class="col-md-4">
+                                        <a class="font-weight-bold"> Data:</a>
                                     </div>
                                     <div class="col-md-8">
                                         <a>{{dataRiepilogo}}</a>
@@ -101,7 +110,7 @@
                                 <div class="row">
 
                                     <div class="col-md-2">
-                                        <button type="button" class="btn btn-secondary"
+                                        <button *ngIf="progetto.stato === 'aperto'" type="button" class="btn btn-secondary"
                                             (click)="modificaRiepilogo()">{{tastoModifica}}</button>
                                     </div>
 
@@ -109,7 +118,19 @@
 
                             </div>
 
+                            <div *ngIf="tab === progetto.id_candidatura" class="tab-pane fade"
+                                id="{{progetto.id_candidatura}}">
+                                <div class="row">
+                                    <div class="col-md-7 ">
+                                        <a class="font-weight-bold">Candidature</a> 
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
+
+
                     </div>
                     <br>
                 </div>

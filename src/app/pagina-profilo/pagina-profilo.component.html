@@ -116,6 +116,11 @@
                                 <button type="button" class="btn btn-secondary"
                                     (click)="modificaProfilo()">{{tastoModifica}}</button>
                             </div>
+                            <br>
+                            <br>
+                            <div class="col-md-4">
+                                <button *ngIf="isDisabled==false"  class="btn btn-secondary" (click)="modificaPassword()">Cambia Password</button>
+                            </div>
 
                         </div>
 
@@ -123,7 +128,6 @@
 
                     </div>
 
-                    <a href *ngIf="isDisabled==false" (click)="modificaPassword()">Cambia Password</a>
                     <!-- Aggiungere qui altri contenuti dei tab -->
                 </div>
 

@@ -15,7 +15,6 @@ const routes: Routes = [
   { path: "Pro342", component: AmministratoreComponent },
   { path: "registrazione", component: RegistrazioneComponent },
   { path: "pagina-profilo", component: PaginaProfiloComponent },
-  { path: "riepilogo-progetto", component:RiepilogoProgettoComponent },
   { path: "**", component: PaginaNonTrovataComponent }
 ];
 
@@ -28,5 +27,4 @@ export const routingComponents = [HomeComponent,
                                   LoginComponent,
                                   AmministratoreComponent,
                                   RegistrazioneComponent,
-                                  PaginaProfiloComponent,
-                                  RiepilogoProgettoComponent];
+                                  PaginaProfiloComponent];
