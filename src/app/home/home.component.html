@@ -57,7 +57,8 @@
 
                     <div class="ml-auto w-25">
                         <button *ngIf="progetto.partecipa === true && logged === true" type="submit"
-                            class="btn btn-secondary">Partecipa</button>
+                            class="btn btn-secondary" (click)="partecipaProgetto(progetto.idProgetto)">Partecipa
+                        </button>
                         <button *ngIf="logged === false" type="submit" class="btn btn-secondary">Elimina</button>   
                     </div>
                 </div>

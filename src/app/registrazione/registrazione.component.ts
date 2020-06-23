@@ -28,11 +28,8 @@ export class RegistrazioneComponent implements OnInit {
   
   async registrazione() {
 
-    this.vero = false;
-
     if ((this.teamMate.password === this.teamMate.confPassword) && (this.teamMate.nome != "") && (this.teamMate.cognome != "") && (this.teamMate.citta != "")) {
 
-      this.vero = false;
       var result = await this.afAuth.createUserWithEmailAndPassword(this.teamMate.email, this.teamMate.password);
       this.firestore.collection("teamMate").doc(result.user.uid).set({
         nome: this.teamMate.nome,
@@ -53,7 +50,7 @@ export class RegistrazioneComponent implements OnInit {
     }
     else {
 
-      this.vero = true; 
+     window.confirm("Campi inseriti non validi!");
 
     }
   }

@@ -4,7 +4,7 @@
 
 <body>
     <div class="container">
-        <div *ngFor="let progetto of progetti" class="row" id="progetto.nome">
+        <div *ngFor="let progetto of progetti" class="row">
             <div class="col-md-12">
                 <div class="card">
                     <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}
@@ -19,11 +19,12 @@
                     <div class="card-body">
 
                         <!-- TABS  -->
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" id="{{progetto.nome}}">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" (click)="changeTabToDes(progetto.nome)"
                                     href="#progetto.id_descrizione">Descrizione</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" (click)="changeTabToRiep(progetto.nome)" href="#progetto.id_riepilogo">Riepilogo</a>
                             </li>

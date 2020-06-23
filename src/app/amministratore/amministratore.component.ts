@@ -31,12 +31,19 @@ export class AmministratoreComponent implements OnInit {
       admins.forEach((admin) => {
         this.amministratore.username = admin.data().username;
         this.amministratore.password = admin.data().password;
-        if ((this.amministratore.username === this.username) && (this.amministratore.password === this.password)) {
-          this.router.navigate(['/home']);
-          this.cambioValore();
-        }
+        
       })
     });
+
+    if ((this.amministratore.username === this.username) && (this.amministratore.password === this.password)) {
+      this.router.navigate(['/home']);
+      this.cambioValore();
+    }
+    else {
+
+      window.confirm("Campi inseriti non validi!");
+
+    }
 
   }
 

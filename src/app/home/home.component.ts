@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ValueService } from '../value.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { newArray } from '@angular/compiler/src/util';
+import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 
 
 class progetto {
@@ -16,8 +17,10 @@ class progetto {
   public nomeTeamLeader;
   public cognomeTeamLeader;
   public partecipa;
+  public idProgetto;
 
-  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) num_teamMate, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa) {
+  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) num_teamMate, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa, @Inject(String) idProgetto) {
+
     this.nome = nome;
     this.genere = genere;
     this.num_partecipanti = num_partecipanti;
@@ -26,8 +29,12 @@ class progetto {
     this.nomeTeamLeader = nomeTeamLeader;
     this.cognomeTeamLeader = cognomeTeamLeader;
     this.partecipa = partecipa;
+    this.idProgetto = idProgetto;
+
   }
 
+
+  
 }
 
 @Component({
@@ -42,12 +49,16 @@ export class HomeComponent implements OnInit {
   isAdmin: boolean;
   accesso: boolean;
   prelievo: boolean;
-  idTeamLeader: string;
+  idLoggato: string;
   public progetti: progetto[];
   nomeTL: string;
   cognomeTL: string;
   partecipa: boolean;
   public logged = false;
+
+  public progetto = {nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idListaAttesa: [], idPartecipanti: [] };
+
+  public partecipanti:Array<string> = []; 
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
 
@@ -65,7 +76,6 @@ export class HomeComponent implements OnInit {
         this.logged = true;
       }
 
-
     });
 
   }
@@ -77,26 +87,29 @@ export class HomeComponent implements OnInit {
   AcquisizioneProgetti() {
 
     this.afAuth.authState.subscribe((users) => {
+
       if (users != null) {
-        this.idTeamLeader = users.uid;
+        this.idLoggato = users.uid;
       }
+
       this.firestore.collection("Progetto").get().forEach((projs) => {
         projs.forEach((proj) => {
           this.firestore.collection("teamMate").doc(proj.data().teamLeader).get().forEach((user) => {
             this.nomeTL = user.data().nome;
             this.cognomeTL = user.data().cognome;
-            if (proj.data().teamLeader === this.idTeamLeader) {
+
+            if (proj.data().teamLeader === this.idLoggato) {
               this.partecipa = false
             }
             else {
               this.partecipa = true
             }
-
+            
             if (this.progetti != undefined) {
-              this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa));
+              this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id));
             }
             else {
-              this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa)];
+              this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id)];
             }
           }
           )
@@ -105,4 +118,37 @@ export class HomeComponent implements OnInit {
 
     })
   }
+
+  partecipaProgetto(ID_Progetto_Selezionato) {
+    
+    this.firestore.collection("Progetto").doc(ID_Progetto_Selezionato).get().forEach((proj) => {
+
+      this.progetto.idListaAttesa = proj.data().idListaAttesa;
+
+      if(proj.data().idListaAttesa === undefined){
+         this.progetto.idListaAttesa=[this.idLoggato]
+      }
+      else{
+        if(this.progetto.idListaAttesa.indexOf(this.idLoggato)===-1)
+        {
+          this.progetto.idListaAttesa.push(this.idLoggato)
+        }
+        else{
+          window.confirm("Hai già fatto richiesta di partecipazione per questo progetto")
+        }
+
+        
+      }
+      this.firestore.collection("Progetto").doc(ID_Progetto_Selezionato).set({
+        ...proj.data(),
+        idListaAttesa:this.progetto.idListaAttesa,
+      })
+    })
+
+
+
+  }
+
+
+
 }
