@@ -30,11 +30,11 @@ class progetto {
     this.data_pubblicazione = new Date(data_pubblicazione.seconds * 1000); 
     this.num_teamMate = num_teamMate;
     this.stato = stato;
-    this.id_descrizione += this.nome;
-    this.id_riepilogo += this.nome;
-    this.id_candidatura += this.nome;
     this.idProgetto = idProgetto;
-    console.log(idProgetto);
+    this.id_descrizione += this.idProgetto;
+    this.id_riepilogo += this.idProgetto;
+    this.id_candidatura += this.idProgetto;
+    console.log(this.id_descrizione);
     this.dataProgetto = this.data_pubblicazione.getDate() + "/" + (this.data_pubblicazione.getMonth()+1) + "/" + this.data_pubblicazione.getFullYear(); 
 
   }
@@ -73,7 +73,7 @@ export class RiepilogoProgettoComponent implements OnInit {
         docs.forEach(doc=>{
           if (this.progetti===undefined)
           {
-            this.tab += doc.data().nome;
+            this.tab += doc.id;
             this.progetti= [new progetto(doc.data().nome, doc.data().genere, doc.data().num_partecipanti, doc.data().descrizione, doc.data().teamLeader,doc.data().data_pubblicazione,doc.data().num_teamMate, doc.data().stato, doc.id)]
           }
           else
@@ -111,21 +111,21 @@ export class RiepilogoProgettoComponent implements OnInit {
     window.alert("Aggiornare la pagina per visualizzare la modifica dello stato!!");
   }
 
-  changeTabToDes(nome_progetto) {
+  changeTabToDes(idProgetto) {
     this.tab = "idDes";
-    this.tab += nome_progetto;
+    this.tab += idProgetto;
     console.log(this.tab);
   }
 
-  changeTabToRiep(nome_progetto) {
+  changeTabToRiep(idProgetto) {
     this.tab = "idRie";
-    this.tab += nome_progetto ;
+    this.tab += idProgetto ;
     console.log(this.tab);
   }
 
-  changeTabToCand(nome_progetto) {
+  changeTabToCand(idProgetto) {
     this.tab = "idCan";
-    this.tab += nome_progetto ;
+    this.tab += idProgetto ;
     console.log(this.tab);
   }
 
