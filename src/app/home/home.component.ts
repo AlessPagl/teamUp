@@ -17,7 +17,7 @@ class progetto {
   public cognomeTeamLeader;
   public partecipa;
 
-  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti,@Inject(String) num_teamMate, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa) {
+  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) num_teamMate, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa) {
     this.nome = nome;
     this.genere = genere;
     this.num_partecipanti = num_partecipanti;
