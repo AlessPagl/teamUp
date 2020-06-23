@@ -12,18 +12,18 @@
                     <div class="card-body">
 
                         <!-- TABS  -->
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" id="{{progetto.nome}}">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#descrizione">Descrizione</a>
+                                <a class="nav-link active" data-toggle="tab" data-target="#{{progetto.nome}}descrizione" role="tab">Descrizione</a>
 
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#riepilogo">Riepilogo</a>
+                                <a class="nav-link" data-toggle="tab" data-target="#{{progetto.nome}}riepilogo" role="tab">Riepilogo</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#candidature">Candidature</a>
+                                <a class="nav-link" data-toggle="tab" data-target="candidature"role="tab" >Candidature</a>
                             </li>
 
                             
@@ -33,7 +33,7 @@
                         <!-- CONTENUTO CARD -->
 
                         <div class="tab-content ">
-                            <div class="tab-pane fade active show" id="descrizione">
+                            <div class="tab-pane fade active show" id="{{progetto.nome}}descrizione">
                                 <div class="col-md-4">
                                     <a>descrizione</a>
                                 </div>
@@ -41,7 +41,7 @@
 
                             <br>
 
-                            <div class="tab-pane fade" id="riepilogo">
+                            <div class="tab-pane fade" id="{{progetto.nome}}riepilogo">
 
 
                                 <div class="row">

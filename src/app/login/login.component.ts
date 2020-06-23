@@ -21,7 +21,12 @@ export class LoginComponent implements OnInit {
 
   async login() {
 
-    var result = await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password);
+    /* var result = await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password); */
+
+    await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password).catch(function(error) {
+      window.confirm("Campi inseriti non validi!");
+    })
+
     this.router.navigate(['/home']);
 
   }

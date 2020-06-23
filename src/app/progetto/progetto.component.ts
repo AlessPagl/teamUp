@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProgettoComponent implements OnInit {
 
-  public progetto = {nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto"};
+  public progetto = {nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idPartecipanti: [] };
 
   constructor(public firestore: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
 
