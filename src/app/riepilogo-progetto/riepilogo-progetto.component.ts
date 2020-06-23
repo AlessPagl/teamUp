@@ -14,6 +14,9 @@ class progetto {
   public teamLeader;
   public data_pubblicazione;
   public num_teamMate;
+  public id_descrizione = "idDes";
+  public id_riepilogo = "idRie";
+  public id_candidatura = "idCand";
   public stato;
 
   constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) teamLeader, @Inject(Object) data_pubblicazione, @Inject(Boolean) num_teamMate, @Inject(Boolean) stato ) {
@@ -25,6 +28,9 @@ class progetto {
     this.data_pubblicazione = data_pubblicazione;
     this.num_teamMate = num_teamMate;
     this.stato = stato;
+    this.id_descrizione += this.nome;
+    this.id_riepilogo += this.nome;
+    this.id_candidatura += this.nome;
 
   }
 
@@ -41,9 +47,9 @@ export class RiepilogoProgettoComponent implements OnInit {
 
   public progetti: progetto[];
 
-  public tabDes = "";
-  public tabRie = "";
-  public tabCand = "";
+  tabDes:  string;
+  tabRie:  string;
+  tabCand: string;
 
   public isDisabled = true;
   public tastoModifica = "Modifica";
