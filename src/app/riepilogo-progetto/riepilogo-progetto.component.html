@@ -7,7 +7,6 @@
         <div *ngFor="let progetto of progetti" class="row" id="progetto.nome">
             <div class="col-md-12">
                 <div class="card">
-<<<<<<< HEAD
                     <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}
                         <p *ngIf="progetto.stato === 'aperto'" class="text-success font-italic font-weight-light">
                             {{progetto.stato}}
@@ -17,41 +16,27 @@
                         </p>
                     </h5>
 
-=======
-                    <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}</h5>
-                    
->>>>>>> 7c877614ab60e92cfcc0e4dcf2e0ddccfdf86827
                     <div class="card-body">
 
                         <!-- TABS  -->
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab"
+                                <a class="nav-link active" data-toggle="tab" (click)="changeTabToDes(progetto.nome)"
                                     href="#progetto.id_descrizione">Descrizione</a>
                             </li>
                             <li class="nav-item">
-<<<<<<< HEAD
-                                <a class="nav-link" data-toggle="tab" href="#progetto.id_riepilogo">Riepilogo</a>
-=======
-                                <a class="nav-link" data-toggle="tab" href="#riepilogo">Riepilogo</a>
->>>>>>> 7c877614ab60e92cfcc0e4dcf2e0ddccfdf86827
+                                <a class="nav-link" data-toggle="tab" (click)="changeTabToRiep(progetto.nome)" href="#progetto.id_riepilogo">Riepilogo</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#progetto.id_candidature">Candidature</a>
+                                <a class="nav-link" data-toggle="tab" (click)="changeTabToCand(progetto.nome)" href="#progetto.id_candidature">Candidature</a>
                             </li>
-<<<<<<< HEAD
-=======
-
-                            
-
->>>>>>> 7c877614ab60e92cfcc0e4dcf2e0ddccfdf86827
                         </ul>
 
                         <!-- CONTENUTO CARD -->
 
                         <div class="tab-content ">
-                            <div class="tab-pane fade active show" id="progetto.id_descrizione">
+                            <div *ngIf="tabDes === progetto.id_descrizione" class="tab-pane fade active show" id="progetto.id_descrizione">
                                 <br>
                                 <div class="row">
                                     <div class="col-md-7 ">
@@ -81,20 +66,12 @@
 
                             <br>
 
-<<<<<<< HEAD
-                            <div class="tab-pane fade" id="progetto.id_riepilogo">
-=======
-                            <div class="tab-pane fade" id="riepilogo">
->>>>>>> 7c877614ab60e92cfcc0e4dcf2e0ddccfdf86827
+                            <div *ngIf="tabRie === progetto.id_riepilogo" class="tab-pane fade" id="progetto.id_riepilogo">
 
 
                                 <div class="row">
                                     <div class="col-md-4 ">
-<<<<<<< HEAD
                                         <a class="font-weight-bold" name="progetto.id_riepilogo">Avanzamento Progetto:</a>
-=======
-                                        <a>Avanzamento Progetto:</a>
->>>>>>> 7c877614ab60e92cfcc0e4dcf2e0ddccfdf86827
                                     </div>
 
                                     <div class="col-md-8">
@@ -110,7 +87,7 @@
                                 <br>
 
                                 <div class="row">
-                                    <div class="col-md-4 ">
+                                    <div class=""col-md-4 >
                                         <a class="font-weight-bold">Data:</a>
                                     </div>
                                     <div class="col-md-8">
@@ -134,7 +111,7 @@
                         </div>
                     </div>
                     <br>
-                </div> 
+                </div>
                 <br>
             </div>
 

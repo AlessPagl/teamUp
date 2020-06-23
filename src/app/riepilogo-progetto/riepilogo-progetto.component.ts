@@ -50,6 +50,10 @@ export class RiepilogoProgettoComponent implements OnInit {
 
   public progetti: progetto[];
 
+  public tabDes = "";
+  public tabRie = "";
+  public tabCand = "";
+
   public isDisabled = true;
   public tastoModifica = "Modifica";
   public dataRiepilogo = this.riepilogo.data.getDate() + "/" + (this.riepilogo.data.getMonth() + 1) + "/" + this.riepilogo.data.getFullYear();
@@ -92,6 +96,21 @@ export class RiepilogoProgettoComponent implements OnInit {
 
     // });
 
+  }
+
+  changeTabToDes(nome_progetto) {
+    this.tabDes = "idDes";
+    this.tabDes += nome_progetto ;
+  }
+
+  changeTabToRiep(nome_progetto) {
+    this.tabRie = "idRie";
+    this.tabRie += nome_progetto ;
+  }
+
+  changeTabToCand(nome_progetto) {
+    this.tabCand = "idCan";
+    this.tabCand += nome_progetto ;
   }
 
 
