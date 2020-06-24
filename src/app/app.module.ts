@@ -18,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AmministratoreComponent } from './amministratore/amministratore.component';
 import { RiepilogoProgettoComponent } from './riepilogo-progetto/riepilogo-progetto.component';
 import { ProgettoComponent } from './progetto/progetto.component';
+import { ProgettiTeamMateComponent } from './progetti-team-mate/progetti-team-mate.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProgettoComponent } from './progetto/progetto.component';
     AmministratoreComponent,
     RiepilogoProgettoComponent,
     ProgettoComponent,
+    ProgettiTeamMateComponent,
   ],
 
   imports: [
