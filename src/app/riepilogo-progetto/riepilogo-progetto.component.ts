@@ -21,8 +21,8 @@ class progetto {
   public dataProgetto;
   public stato;
   public riepilogo;
-   
-  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) teamLeader, @Inject(Object) data_pubblicazione, @Inject(Boolean) num_teamMate, @Inject(Boolean) stato, @Inject(String) idProgetto, @Inject(String) riepilogo ) {
+
+  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) teamLeader, @Inject(Object) data_pubblicazione, @Inject(Boolean) num_teamMate, @Inject(Boolean) stato, @Inject(String) idProgetto, @Inject(String) riepilogo) {
     this.nome = nome;
     this.genere = genere;
     this.num_partecipanti = num_partecipanti;
@@ -36,7 +36,7 @@ class progetto {
     this.id_riepilogo += this.idProgetto;
     this.id_candidatura += this.idProgetto;
     this.dataProgetto = this.data_pubblicazione.getDate() + "/" + (this.data_pubblicazione.getMonth() + 1) + "/" + this.data_pubblicazione.getFullYear();
-    this.riepilogo= riepilogo; 
+    this.riepilogo = riepilogo;
 
   }
 
@@ -67,11 +67,11 @@ class partecipante {
 })
 export class RiepilogoProgettoComponent implements OnInit {
 
-  public riepilogo = { AvanzamentoProgetto: "", data: new Date() };
+  public riepilogo = {AvanzamentoProgetto: "", data: new Date() };
 
   public progetti: progetto[];
 
-  public progetto = { idListaAttesa: [], idPartecipanti: [], num_teamMate: 0, riepilogo: ""};
+  public progetto = { idListaAttesa: [], idPartecipanti: [], num_teamMate: 0, riepilogo: this.riepilogo.AvanzamentoProgetto };
 
   public partecipanti: partecipante[];
   public accettazione;
@@ -84,6 +84,8 @@ export class RiepilogoProgettoComponent implements OnInit {
 
   public isDisabled = true;
   public tastoModifica = "Modifica";
+
+
   public dataRiepilogo = this.riepilogo.data.getDate() + "/" + (this.riepilogo.data.getMonth() + 1) + "/" + this.riepilogo.data.getFullYear()
 
 
@@ -112,10 +114,9 @@ export class RiepilogoProgettoComponent implements OnInit {
 
   modificaValori(idProgetto) {
 
-
-      this.firestore.collection("Progetto").doc(idProgetto).update({
-        riepilogo: this.progetto.riepilogo
-      })
+    this.firestore.collection("Progetto").doc(idProgetto).update({
+      riepilogo: this.riepilogo.AvanzamentoProgetto
+    })
 
   }
 
@@ -139,6 +140,12 @@ export class RiepilogoProgettoComponent implements OnInit {
   changeTabToRiep(idProgetto) {
     this.tab = "idRie";
     this.tab += idProgetto;
+    this.firestore.collection("Progetto").doc(idProgetto).get().forEach(proj=>{
+      if (proj.data().riepilogo!==undefined)
+      {
+        this.riepilogo.AvanzamentoProgetto=proj.data().riepilogo
+      }
+    })
   }
 
   changeTabToCand(idProgetto) {
@@ -154,8 +161,8 @@ export class RiepilogoProgettoComponent implements OnInit {
     }
     else {
       this.isDisabled = true;
-      this.modificaValori(idProgetto),
-        this.tastoModifica = "Modifica";
+       this.modificaValori(idProgetto),
+        this.tastoModifica ="Modifica";
     }
   }
 
@@ -218,11 +225,11 @@ export class RiepilogoProgettoComponent implements OnInit {
         idListaAttesa: this.progetto.idListaAttesa,
         num_teamMate: this.progetto.num_teamMate,
       })
-      console.log(this.progetto.num_teamMate) 
+      console.log(this.progetto.num_teamMate)
     });
 
-  this.accettazione = 1;
-  window.confirm("La pagina si aggiornerà per visualizzare la modifica dello stato!!");
+    this.accettazione = 1;
+    window.confirm("La pagina si aggiornerà per visualizzare la modifica dello stato!!");
 
   }
 
