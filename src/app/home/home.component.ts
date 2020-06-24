@@ -17,9 +17,10 @@ class progetto {
   public nomeTeamLeader;
   public cognomeTeamLeader;
   public partecipa;
+  public stato;
   public idProgetto;
 
-  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) num_teamMate, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa, @Inject(String) idProgetto) {
+  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) num_teamMate, @Inject(String) descrizione, @Inject(String) nomeTeamLeader, @Inject(String) cognomeTeamLeader, @Inject(Boolean) partecipa, @Inject(String) idProgetto, @Inject(String) stato) {
 
     this.nome = nome;
     this.genere = genere;
@@ -29,6 +30,7 @@ class progetto {
     this.nomeTeamLeader = nomeTeamLeader;
     this.cognomeTeamLeader = cognomeTeamLeader;
     this.partecipa = partecipa;
+    this.stato = stato;
     this.idProgetto = idProgetto;
 
   }
@@ -106,10 +108,10 @@ export class HomeComponent implements OnInit {
             }
             
             if (this.progetti != undefined) {
-              this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id));
+              this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id, proj.data().stato));
             }
             else {
-              this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id)];
+              this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id, proj.data().stato)];
             }
           }
           )
@@ -124,12 +126,13 @@ export class HomeComponent implements OnInit {
     this.firestore.collection("Progetto").doc(ID_Progetto_Selezionato).get().forEach((proj) => {
 
       this.progetto.idListaAttesa = proj.data().idListaAttesa;
+      this.progetto.idPartecipanti = proj.data().idPartecipanti;
 
       if(proj.data().idListaAttesa === undefined){
          this.progetto.idListaAttesa=[this.idLoggato]
       }
       else{
-        if(this.progetto.idListaAttesa.indexOf(this.idLoggato)===-1)
+        if((this.progetto.idListaAttesa.indexOf(this.idLoggato)===-1) && (this.progetto.idPartecipanti.indexOf(this.idLoggato)===-1))
         {
           this.progetto.idListaAttesa.push(this.idLoggato)
         }
@@ -144,7 +147,6 @@ export class HomeComponent implements OnInit {
         idListaAttesa:this.progetto.idListaAttesa,
       })
     })
-
 
 
   }

@@ -20,8 +20,9 @@ class progetto {
   public idProgetto;
   public dataProgetto;
   public stato;
-
-  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) teamLeader, @Inject(Object) data_pubblicazione, @Inject(Boolean) num_teamMate, @Inject(Boolean) stato, @Inject(String) idProgetto) {
+  public riepilogo;
+   
+  constructor(@Inject(String) nome, @Inject(String) genere, @Inject(String) num_partecipanti, @Inject(String) descrizione, @Inject(String) teamLeader, @Inject(Object) data_pubblicazione, @Inject(Boolean) num_teamMate, @Inject(Boolean) stato, @Inject(String) idProgetto, @Inject(String) riepilogo ) {
     this.nome = nome;
     this.genere = genere;
     this.num_partecipanti = num_partecipanti;
@@ -34,9 +35,27 @@ class progetto {
     this.id_descrizione += this.idProgetto;
     this.id_riepilogo += this.idProgetto;
     this.id_candidatura += this.idProgetto;
-    console.log(this.id_descrizione);
     this.dataProgetto = this.data_pubblicazione.getDate() + "/" + (this.data_pubblicazione.getMonth() + 1) + "/" + this.data_pubblicazione.getFullYear();
+    this.riepilogo= riepilogo; 
 
+  }
+
+}
+
+class partecipante {
+
+  public nome;
+  public cognome;
+  public idPartencipante;
+
+  constructor(@Inject(String) nome, @Inject(String) cognome, @Inject(String) idPartencipante) {
+
+    this.nome = nome;
+    this.cognome = cognome;
+    this.idPartencipante = idPartencipante;
+
+    console.log(this.nome);
+    console.log(this.cognome);
   }
 
 }
@@ -51,6 +70,14 @@ export class RiepilogoProgettoComponent implements OnInit {
   public riepilogo = { AvanzamentoProgetto: "", data: new Date() };
 
   public progetti: progetto[];
+
+  public progetto = { idListaAttesa: [], idPartecipanti: [], num_teamMate: 0, riepilogo: ""};
+
+  public partecipanti: partecipante[];
+  public accettazione;
+
+  public nome;
+  public cognome;
 
   tab: string;
   public conferma = false;
@@ -73,75 +100,154 @@ export class RiepilogoProgettoComponent implements OnInit {
         docs.forEach(doc => {
           if (this.progetti === undefined) {
             this.tab += doc.id;
-            this.progetti = [new progetto(doc.data().nome, doc.data().genere, doc.data().num_partecipanti, doc.data().descrizione, doc.data().teamLeader, doc.data().data_pubblicazione, doc.data().num_teamMate, doc.data().stato, doc.id)]
+            this.progetti = [new progetto(doc.data().nome, doc.data().genere, doc.data().num_partecipanti, doc.data().descrizione, doc.data().teamLeader, doc.data().data_pubblicazione, doc.data().num_teamMate, doc.data().stato, doc.id, doc.data().riepilogo)]
           }
           else {
-            this.progetti.push(new progetto(doc.data().nome, doc.data().genere, doc.data().num_partecipanti, doc.data().descrizione, doc.data().teamLeader, doc.data().data_pubblicazione, doc.data().num_teamMate, doc.data().stato, doc.id))
+            this.progetti.push(new progetto(doc.data().nome, doc.data().genere, doc.data().num_partecipanti, doc.data().descrizione, doc.data().teamLeader, doc.data().data_pubblicazione, doc.data().num_teamMate, doc.data().stato, doc.id, doc.data().riepilogo))
           }
         })
       })
     })
   }
 
-  async modificaValori() {
+  modificaValori(idProgetto) {
 
-    //subscribe((user) => {
 
-    //il problema è qui, se salvi le informazioni con l'ID dell'utente non sai a che profilo
-    //si riferisce
-    //2 alternative: 
-    //Recuperi e salvi le cose con l'ID del progetto
-    //Salvi il riepilogo in un sub collection del progetto
-
-    // this.firestore.collection("riepilogo").doc(user.uid).set({
-    //   ...this.riepilogo
-
-    // });
+      this.firestore.collection("Progetto").doc(idProgetto).update({
+        riepilogo: this.progetto.riepilogo
+      })
 
   }
 
   chiudiProgetto(idProgetto) {
-    console.log(idProgetto);
     this.firestore.collection("Progetto").doc(idProgetto).update({
       stato: "chiuso"
     });
     this.conferma = true;
 
-    if(window.confirm("La pagina si aggiornerà per visualizzare la modifica dello stato!!")) {
+    if (window.confirm("La pagina si aggiornerà per visualizzare la modifica dello stato!!")) {
       window.location.reload();
-      
+
     }
   }
 
   changeTabToDes(idProgetto) {
     this.tab = "idDes";
     this.tab += idProgetto;
-    console.log(this.tab);
   }
 
   changeTabToRiep(idProgetto) {
     this.tab = "idRie";
     this.tab += idProgetto;
-    console.log(this.tab);
   }
 
   changeTabToCand(idProgetto) {
     this.tab = "idCan";
     this.tab += idProgetto;
-    console.log(this.tab);
   }
 
 
-  modificaRiepilogo() {
+  modificaRiepilogo(idProgetto) {
     if (this.isDisabled === true) {
       this.isDisabled = false;
       this.tastoModifica = "Salva";
     }
     else {
       this.isDisabled = true;
-      this.modificaValori(),
+      this.modificaValori(idProgetto),
         this.tastoModifica = "Modifica";
     }
   }
 
+  visualizzaCandidato(idProgetto) {
+    this.partecipanti = [];
+    this.firestore.collection("Progetto").doc(idProgetto).get().forEach((proj) => {
+
+      this.progetto.idListaAttesa = proj.data().idListaAttesa;
+      if (this.progetto.idListaAttesa !== undefined && this.progetto.idListaAttesa.length > 0) {
+        this.progetto.idListaAttesa.forEach((idUser) => {
+
+          this.firestore.collection("teamMate").doc(idUser).get().forEach((user) => {
+
+            if (this.partecipanti === undefined) {
+
+              this.partecipanti = [new partecipante(user.data().nome, user.data().cognome, idUser)]
+            }
+            else {
+              this.partecipanti.push(new partecipante(user.data().nome, user.data().cognome, idUser))
+            }
+
+          });
+
+        });
+
+      }
+    });
+
+  }
+
+  mostraDescrizione(idProgetto) {
+    this.partecipanti = [];
+    this.visualizzaCandidato(idProgetto);
+    this.changeTabToCand(idProgetto);
+  }
+
+  accettaCandidato(idProgetto, idUser) {
+    this.progetto.idListaAttesa = []
+    this.progetto.idPartecipanti = []
+    this.firestore.collection("Progetto").doc(idProgetto).get().forEach((proj) => {
+
+      this.progetto.idListaAttesa = proj.data().idListaAttesa;
+      this.progetto.idPartecipanti = proj.data().idPartecipanti;
+      this.progetto.num_teamMate = proj.data().num_teamMate;
+      this.progetto.num_teamMate++;
+
+      if (this.progetto.idPartecipanti === undefined) {
+        this.progetto.idPartecipanti = [idUser];
+
+      }
+      else {
+
+        this.progetto.idPartecipanti.push(idUser);
+
+      }
+      this.progetto.idListaAttesa.splice(this.progetto.idListaAttesa.indexOf(idUser), 1)
+
+      this.firestore.collection("Progetto").doc(idProgetto).update({
+        idPartecipanti: this.progetto.idPartecipanti,
+        idListaAttesa: this.progetto.idListaAttesa,
+        num_teamMate: this.progetto.num_teamMate,
+      })
+      console.log(this.progetto.num_teamMate) 
+    });
+
+  this.accettazione = 1;
+  window.confirm("La pagina si aggiornerà per visualizzare la modifica dello stato!!");
+
+  }
+
+  rifiutaCandidato(idProgetto, idUser) {
+
+    this.progetto.idListaAttesa = []
+    this.progetto.idPartecipanti = []
+
+    this.firestore.collection("Progetto").doc(idProgetto).get().forEach((proj) => {
+
+      this.progetto.idListaAttesa = proj.data().idListaAttesa;
+
+      this.progetto.idListaAttesa.splice(this.progetto.idListaAttesa.indexOf(idUser), 1)
+
+      this.firestore.collection("Progetto").doc(idProgetto).update({
+        idListaAttesa: firebase.firestore.FieldValue.delete()
+      })
+    });
+
+
+    this.accettazione = 0;
+    window.confirm("La pagina si aggiornerà per visualizzare la modifica dello stato!!");
+
+  }
+
 }
+
+
