@@ -20,7 +20,6 @@ export class RegistrazioneComponent implements OnInit {
   }
 
   public teamMate = { nome: "", cognome: "", numero_telefono: "", citta: "", email: "", password: "", confPassword: "", descrizione: ""};
-  public vero;
 
   ngOnInit(): void {
   }

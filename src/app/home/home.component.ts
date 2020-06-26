@@ -60,8 +60,6 @@ export class HomeComponent implements OnInit {
 
   public progetto = {nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idListaAttesa: [], idPartecipanti: [] };
 
-  public partecipanti:Array<string> = []; 
-
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
 
     this.AcquisizioneProgetti();
