@@ -114,7 +114,7 @@ export class PaginaProfiloComponent implements OnInit {
 
   /* AGGIUNGI PROGETTO */
 
-  aggiungiProgetto() {
+  statoProgetto() {
 
     if(this.aggProgetto == true) {
 
