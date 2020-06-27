@@ -122,7 +122,8 @@ export class RiepilogoProgettoComponent implements OnInit {
 
   chiudiProgetto(idProgetto) {
     this.firestore.collection("Progetto").doc(idProgetto).update({
-      stato: "chiuso"
+      stato: "chiuso",
+      idListaAttesa: null
     });
     this.conferma = true;
 
