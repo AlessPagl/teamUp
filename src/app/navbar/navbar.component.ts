@@ -13,15 +13,10 @@ export class NavbarComponent implements OnInit {
 
   public logged = false;
   valore: boolean;
-  adminLogged: boolean;
+  public adminLogged = false;
 
-  constructor(public afAuth: AngularFireAuth,public firestore: AngularFirestore, public router: Router, private valueservice: ValueService) { 
-    this.firestore.collection("Admin").ref.where("logged", "==", true).get().then((admins) => {
-      admins.forEach((admin) => {
-        this.adminLogged = admin.data().logged;
-        console.log(this.adminLogged);
-      })
-    })
+  constructor(public afAuth: AngularFireAuth, public firestore: AngularFirestore, public router: Router, private valueservice: ValueService) {
+    this.isLoggedAdmin();
     this.isLogged();
   }
 
@@ -60,6 +55,18 @@ export class NavbarComponent implements OnInit {
       })
     })
     this.router.navigate(['/Pro342']);
+  }
+
+  isLoggedAdmin() {
+
+    this.firestore.collection("Admin").get().forEach((admins) => {
+      admins.forEach((admin) => {
+        if(admin.data().logged === true)
+        this.adminLogged = true;
+        
+      })
+    })
+    console.log(this.adminLogged);
   }
 
 }
