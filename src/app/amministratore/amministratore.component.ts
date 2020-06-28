@@ -17,9 +17,11 @@ export class AmministratoreComponent implements OnInit {
   valore: boolean;
 
   constructor(public afAuth: AngularFireAuth, public firestore: AngularFirestore, public router: Router, private valueservice: ValueService) {
+    
     this.SignOutAdmin(); 
     this.afAuth.signOut();
     this.valore = false;
+
   }
 
   ngOnInit(): void {
@@ -27,26 +29,42 @@ export class AmministratoreComponent implements OnInit {
   }
 
   Auth() {
+
     this.valore = false;
+
     this.firestore.collection("Admin").get().forEach((admins) => {
+
       admins.forEach((admin) => {
+
         this.amministratore.username = admin.data().username;
         this.amministratore.password = admin.data().password;
+
         if ((this.amministratore.username === this.username) && (this.amministratore.password === this.password)) {
-          this.firestore.collection("Admin").ref.where("username", "==", this.username).get().then((admins) =>{ 
+
+          this.firestore.collection("Admin").get().forEach((admins) =>{ 
+
             admins.forEach((admin) => {
+
               this.firestore.collection("Admin").doc(admin.id).update({
+
                 logged: true
+
               })
             })})
-          this.router.navigate(['/home']);
+
+            this.router.navigate(['/home']);
+          
           /* this.cambioValore(); */
         }
         else {
-          this.firestore.collection("Admin").ref.where("username", "==", this.username).get().then((admins) =>{ 
+          this.firestore.collection("Admin").get().forEach((admins) =>{ 
+
             admins.forEach((admin) => {
+
               this.firestore.collection("Admin").doc(admin.id).update({
-                logged: true
+
+                logged: false
+
               })
             })})
         }
@@ -58,10 +76,14 @@ export class AmministratoreComponent implements OnInit {
 
     SignOutAdmin() {
 
-      this.firestore.collection("Admin").ref.where("logged", "==", true).get().then((admins) =>{ 
+      this.firestore.collection("Admin").ref.where("logged", "==", true).get().then((admins) =>{
+
         admins.forEach((admin) => {
+
           this.firestore.collection("Admin").doc(admin.id).update({
+
             logged: false
+            
           })
         })})
 

@@ -15,9 +15,13 @@ export class NavbarComponent implements OnInit {
   valore: boolean;
   public adminLogged = false;
 
+  daCercare: String
+
   constructor(public afAuth: AngularFireAuth, public firestore: AngularFirestore, public router: Router, private valueservice: ValueService) {
+    
     this.isLoggedAdmin();
     this.isLogged();
+
   }
 
   links: Array<{ text: string, path: string }>;
@@ -38,6 +42,7 @@ export class NavbarComponent implements OnInit {
         this.logged = true
       }
     })
+
   }
 
   async logoutUser() {

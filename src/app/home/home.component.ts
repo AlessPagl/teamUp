@@ -69,9 +69,9 @@ export class HomeComponent implements OnInit {
 
         this.isAdmin = admin.data().logged;
 
-        if(this.isAdmin === true)
-         this.adminLogged = true
-        
+        if (this.isAdmin === true)
+          this.adminLogged = true
+
       })
 
     });
