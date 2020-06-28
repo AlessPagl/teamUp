@@ -7,6 +7,8 @@ import { newArray } from '@angular/compiler/src/util';
 import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 
 
+
+
 class progetto {
 
   public nome;
@@ -35,8 +37,6 @@ class progetto {
 
   }
 
-
-  
 }
 
 @Component({
@@ -58,9 +58,11 @@ export class HomeComponent implements OnInit {
   partecipa: boolean;
   public logged = false;
 
-  public progetto = {nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idListaAttesa: [], idPartecipanti: [] };
+  public progetto = { nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idListaAttesa: [], idPartecipanti: [] };
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
+
+    this.ricercaTitoloProgetto("Partita Calcetto")
 
     this.AcquisizioneProgetti();
 
@@ -78,11 +80,16 @@ export class HomeComponent implements OnInit {
 
     });
 
+
+
   }
 
   ngOnInit(): void {
 
   }
+
+
+
 
   AcquisizioneProgetti() {
 
@@ -104,7 +111,7 @@ export class HomeComponent implements OnInit {
             else {
               this.partecipa = true
             }
-            
+
             if (this.progetti != undefined) {
               this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id, proj.data().stato));
             }
@@ -120,35 +127,64 @@ export class HomeComponent implements OnInit {
   }
 
   partecipaProgetto(ID_Progetto_Selezionato) {
-    
+
     this.firestore.collection("Progetto").doc(ID_Progetto_Selezionato).get().forEach((proj) => {
 
       this.progetto.idListaAttesa = proj.data().idListaAttesa;
       this.progetto.idPartecipanti = proj.data().idPartecipanti;
 
-      if(proj.data().idListaAttesa === undefined){
-         this.progetto.idListaAttesa=[this.idLoggato]
+      if (proj.data().idListaAttesa === undefined) {
+        this.progetto.idListaAttesa = [this.idLoggato]
       }
-      else{
-        if((this.progetto.idListaAttesa.indexOf(this.idLoggato)===-1) && (this.progetto.idPartecipanti.indexOf(this.idLoggato)===-1))
-        {
+      else {
+        if ((this.progetto.idListaAttesa.indexOf(this.idLoggato) === -1) && (this.progetto.idPartecipanti.indexOf(this.idLoggato) === -1)) {
           this.progetto.idListaAttesa.push(this.idLoggato)
         }
-        else{
+        else {
           window.confirm("Hai già fatto richiesta di partecipazione per questo progetto")
         }
 
-        
+
       }
       this.firestore.collection("Progetto").doc(ID_Progetto_Selezionato).set({
         ...proj.data(),
-        idListaAttesa:this.progetto.idListaAttesa,
+        idListaAttesa: this.progetto.idListaAttesa,
       })
     })
 
+  }
+
+  ricercaTitoloProgetto(titoloProgetto) {
+
+    this.progetti = undefined
+
+    var nomeProj: String
+
+    this.firestore.collection("Progetto").get().forEach((projs) => {
+      projs.forEach((proj) => {
+        nomeProj = proj.data().nome
+        nomeProj.toUpperCase()
+        titoloProgetto.toUpperCase()
+
+        if (nomeProj.search(titoloProgetto) > -1) {
+
+          if (this.progetti != undefined) {
+            this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id, proj.data().stato));
+          }
+          else {
+            this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id, proj.data().stato)];
+          }
+
+        }
+
+      })
+    })
 
   }
 
-
+  eliminaProgetto(idProgetto) {
+    this.firestore.collection("Progetto").doc(idProgetto).delete();
+      window.location.reload(); 
+  }
 
 }

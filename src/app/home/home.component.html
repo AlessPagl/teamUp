@@ -10,7 +10,7 @@
     </div>
     <div>
         <div class="container" *ngFor="let progetto of progetti">
-            <div *ngIf="progetto.stato === 'aperto'" class="card">
+            <div *ngIf="progetto.stato === 'aperto' || logged === false" class="card">
                 <h5 class="card-header" style="background-color: #223449; color: white;">{{progetto.nome}}
                     <h6 class="text-white">Team Leader: {{progetto.nomeTeamLeader}} {{progetto.cognomeTeamLeader}}</h6>
                 </h5>
@@ -31,7 +31,7 @@
                         <button *ngIf="progetto.partecipa === true && logged === true" type="submit"
                             class="btn btn-secondary" (click)="partecipaProgetto(progetto.idProgetto)">Partecipa
                         </button>
-                        <button *ngIf="logged === false" type="submit" class="btn btn-secondary">Elimina</button>
+                        <button *ngIf="logged === false" type="submit" class="btn btn-secondary" (click)="eliminaProgetto(progetto.idProgetto)">Elimina</button>
                     </div>
                 </div>
                 <br>
