@@ -3,11 +3,6 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from '@angular/router';
 import { ValueService } from '../value.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { newArray } from '@angular/compiler/src/util';
-import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
-
-
-
 
 class progetto {
 
@@ -57,6 +52,7 @@ export class HomeComponent implements OnInit {
   cognomeTL: string;
   partecipa: boolean;
   public logged = false;
+  public adminLogged = false;
 
   public progetto = { nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idListaAttesa: [], idPartecipanti: [] };
 
@@ -66,13 +62,25 @@ export class HomeComponent implements OnInit {
 
     this.AcquisizioneProgetti();
 
-    this.valueservice.cast.subscribe(data => this.isAdmin = data);
+    /*  this.valueservice.cast.subscribe(data => this.isAdmin = data); */
+
+    this.firestore.collection("Admin").get().forEach((admins) => {
+      admins.forEach((admin) => {
+
+        this.isAdmin = admin.data().logged;
+
+        if(this.isAdmin === true)
+         this.adminLogged = true
+        
+      })
+
+    });
 
     this.afAuth.authState.subscribe((user) => {
 
-      if ((user === null) && (this.isAdmin === false)) {
+      /* if ((user === null) && (this.adminLogged === false)) {
         this.router.navigate(['/login']);
-      }
+      } */
 
       if (user != null) {
         this.logged = true;
@@ -80,16 +88,11 @@ export class HomeComponent implements OnInit {
 
     });
 
-
-
   }
 
   ngOnInit(): void {
 
   }
-
-
-
 
   AcquisizioneProgetti() {
 
@@ -184,7 +187,7 @@ export class HomeComponent implements OnInit {
 
   eliminaProgetto(idProgetto) {
     this.firestore.collection("Progetto").doc(idProgetto).delete();
-      window.location.reload(); 
+    window.location.reload();
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ValueService } from '../value.service';
 import { Router } from '@angular/router';
 
@@ -12,8 +13,15 @@ export class NavbarComponent implements OnInit {
 
   public logged = false;
   valore: boolean;
+  adminLogged: boolean;
 
-  constructor(public afAuth: AngularFireAuth, public router: Router, private valueservice: ValueService) {
+  constructor(public afAuth: AngularFireAuth,public firestore: AngularFirestore, public router: Router, private valueservice: ValueService) { 
+    this.firestore.collection("Admin").ref.where("logged", "==", true).get().then((admins) => {
+      admins.forEach((admin) => {
+        this.adminLogged = admin.data().logged;
+        console.log(this.adminLogged);
+      })
+    })
     this.isLogged();
   }
 
@@ -35,8 +43,6 @@ export class NavbarComponent implements OnInit {
         this.logged = true
       }
     })
-
-    this.valueservice.cast.subscribe(data => this.valore = data);
   }
 
   async logoutUser() {
@@ -45,8 +51,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-   logoutAdmin() {
-    this.valore = false;
+  logoutAdmin() {
+    this.firestore.collection("Admin").ref.where("logged", "==", true).get().then((admins) => {
+      admins.forEach((admin) => {
+        this.firestore.collection("Admin").doc(admin.id).update({
+          logged: false
+        })
+      })
+    })
     this.router.navigate(['/Pro342']);
   }
 
