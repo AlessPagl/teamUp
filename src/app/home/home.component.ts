@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from '@angular/router';
 import { ValueService } from '../value.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import RicercaProgetto from '../../RicercaProgetti'
 
 class progetto {
 
@@ -32,6 +33,8 @@ class progetto {
 
   }
 
+
+
 }
 
 @Component({
@@ -52,41 +55,31 @@ export class HomeComponent implements OnInit {
   cognomeTL: string;
   partecipa: boolean;
   public logged = false;
-  public adminLogged = false;
 
   public progetto = { nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idListaAttesa: [], idPartecipanti: [] };
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
-
-    this.ricercaTitoloProgetto("Partita Calcetto")
-
-    this.AcquisizioneProgetti();
-
-    /*  this.valueservice.cast.subscribe(data => this.isAdmin = data); */
-
-    this.firestore.collection("Admin").get().forEach((admins) => {
-      admins.forEach((admin) => {
-
-        this.isAdmin = admin.data().logged;
-
-        if (this.isAdmin === true)
-          this.adminLogged = true
-
-      })
-
-    });
+    this.valueservice.cast.subscribe(data => this.isAdmin = data);
 
     this.afAuth.authState.subscribe((user) => {
 
-      /* if ((user === null) && (this.adminLogged === false)) {
+      if ((user === null) && (this.isAdmin === false)) {
         this.router.navigate(['/login']);
-      } */
+      }
 
       if (user != null) {
         this.logged = true;
       }
 
     });
+
+    const IstanzaRicerca = RicercaProgetto.Instance
+    this.progetti = IstanzaRicerca.getProgetti()
+
+
+    if (this.progetti === undefined) {
+      this.AcquisizioneProgetti();
+    }
 
   }
 
@@ -155,39 +148,11 @@ export class HomeComponent implements OnInit {
       })
     })
 
-  }
-
-  ricercaTitoloProgetto(titoloProgetto) {
-
-    this.progetti = undefined
-
-    var nomeProj: String
-
-    this.firestore.collection("Progetto").get().forEach((projs) => {
-      projs.forEach((proj) => {
-        nomeProj = proj.data().nome
-        nomeProj.toUpperCase()
-        titoloProgetto.toUpperCase()
-
-        if (nomeProj.search(titoloProgetto) > -1) {
-
-          if (this.progetti != undefined) {
-            this.progetti.push(new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id, proj.data().stato));
-          }
-          else {
-            this.progetti = [new progetto(proj.data().nome, proj.data().genere, proj.data().num_partecipanti, proj.data().num_teamMate, proj.data().descrizione, this.nomeTL, this.cognomeTL, this.partecipa, proj.id, proj.data().stato)];
-          }
-
-        }
-
-      })
-    })
 
   }
 
   eliminaProgetto(idProgetto) {
     this.firestore.collection("Progetto").doc(idProgetto).delete();
-    window.location.reload();
   }
 
 }

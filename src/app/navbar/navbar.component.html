@@ -5,7 +5,7 @@
 
 <body>
   <!-- NavBar utente non loggato -->
-  <div *ngIf="logged === false && adminLogged === false" class="container-fluid">
+  <div *ngIf="logged===false" class="container-fluid">
     <nav class="navbar navbar-expand-lg fixed-top">
       <a class="navbar-brand text-white">TEAMUP</a>
     </nav>
@@ -31,11 +31,11 @@
             <a routerLink="/pagina-profilo" routerLinkActive="active">Profilo</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0 mx-auto">
-          <input class="form-control mr-sm-2" type="search" placeholder="Cerca" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+        <div class="form-inline my-2 my-lg-0 mx-auto">
+          <input class="form-control mr-sm-2" type="search" placeholder="Cerca" aria-label="Search" [(ngModel)]="daCercare">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="ricercaTitolo()">Cerca</button>
 
-         </form>
+         </div>
          <ul class = "navbar-nav ml-auto"> 
           <li class="nav-item active" >
             <a (click)="logoutUser()" href="/login">Esci</a>
@@ -46,7 +46,7 @@
   </div>
 
   <!-- NavBar admin loggato -->
-  <div *ngIf="adminLogged === true">
+  <div *ngIf="valore === true">
     <nav class="navbar navbar-expand-lg fixed-top">
       <a class="navbar-brand text-white">TEAMUP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -60,11 +60,10 @@
           <a routerLink="/home" routerLinkActive="active"> Home</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <div class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Inserisci cosa cercare" aria-label="Cerca" [(ngModel)]="daCercare">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
-          {{daCercare}}
-         </form>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="ricercaTitolo()">Cerca</button>
+         </div>
          <ul class = "navbar-nav ml-auto"> 
           <li class="nav-item active" >
             <a (click)="logoutAdmin()" href="/Pro342">Esci</a>
@@ -74,6 +73,6 @@
     </nav>
   </div>
 
-</body>
+</body> 
 
 </html>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore } from '@angular/fire/firestore';
 import { ValueService } from '../value.service';
 import { Router } from '@angular/router';
+import RicercaProgetto from '../../RicercaProgetti'
+import RicercaUtenti from '../../ricercaUtenti'
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-navbar',
@@ -13,14 +15,18 @@ export class NavbarComponent implements OnInit {
 
   public logged = false;
   valore: boolean;
-  public adminLogged = false;
-
+  IstanzaRicerca
   daCercare: String
 
-  constructor(public afAuth: AngularFireAuth, public firestore: AngularFirestore, public router: Router, private valueservice: ValueService) {
+  constructor(public afAuth: AngularFireAuth, public router: Router, private valueservice: ValueService, public firestore: AngularFirestore) {
     
-    this.isLoggedAdmin();
     this.isLogged();
+
+    this.IstanzaRicerca = RicercaProgetto.Instance;
+    this.IstanzaRicerca.setfirestore(this.firestore, this.afAuth, this.router);
+
+    /* this.IstanzaRicercaNome = RicercaUtenti.Instance;
+    this.IstanzaRicercaNome.setfirestore(this.firestore, this.afAuth, this.router); */
 
   }
 
@@ -30,8 +36,8 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  /* PER CHIAMARE ID UTENTE */
-  /* console.log(this.afAuth.authState.subscribe((user)=>{console.log(user.uid)})); */
+  /* PER CHIAMARE ID UTENTE /
+  / console.log(this.afAuth.authState.subscribe((user)=>{console.log(user.uid)})); */
 
   isLogged() {
     this.afAuth.authState.subscribe((user) => {
@@ -43,6 +49,7 @@ export class NavbarComponent implements OnInit {
       }
     })
 
+    this.valueservice.cast.subscribe(data => this.valore = data);
   }
 
   async logoutUser() {
@@ -52,26 +59,25 @@ export class NavbarComponent implements OnInit {
   }
 
   logoutAdmin() {
-    this.firestore.collection("Admin").ref.where("logged", "==", true).get().then((admins) => {
-      admins.forEach((admin) => {
-        this.firestore.collection("Admin").doc(admin.id).update({
-          logged: false
-        })
-      })
-    })
+    this.valore = false;
     this.router.navigate(['/Pro342']);
   }
 
-  isLoggedAdmin() {
-
-    this.firestore.collection("Admin").get().forEach((admins) => {
-      admins.forEach((admin) => {
-        if(admin.data().logged === true)
-        this.adminLogged = true;
-        
-      })
-    })
-    console.log(this.adminLogged);
+  async ricercaTitolo() {
+    console.log("CIAO", this.daCercare);
+    await this.IstanzaRicerca.ricercaTitoloProgetto(this.daCercare)
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(["/home"]); // navigate to same route
+    });
   }
+
+  /* async ricercaNomeCognome() {
+
+    await this.IstanzaRicercaNome.ricercaTitoloProgetto(this.daCercare)
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(["/home"]); // navigate to same route
+    });
+
+  } */
 
 }
