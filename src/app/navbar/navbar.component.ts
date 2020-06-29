@@ -3,7 +3,6 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { ValueService } from '../value.service';
 import { Router } from '@angular/router';
 import RicercaProgetto from '../../RicercaProgetti'
-import RicercaUtenti from '../../ricercaUtenti'
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
@@ -17,6 +16,7 @@ export class NavbarComponent implements OnInit {
   valore: boolean;
   IstanzaRicerca
   daCercare: String
+  IstanzaRicercaNome
 
   constructor(public afAuth: AngularFireAuth, public router: Router, private valueservice: ValueService, public firestore: AngularFirestore) {
     
@@ -24,9 +24,6 @@ export class NavbarComponent implements OnInit {
 
     this.IstanzaRicerca = RicercaProgetto.Instance;
     this.IstanzaRicerca.setfirestore(this.firestore, this.afAuth, this.router);
-
-    /* this.IstanzaRicercaNome = RicercaUtenti.Instance;
-    this.IstanzaRicercaNome.setfirestore(this.firestore, this.afAuth, this.router); */
 
   }
 
@@ -66,18 +63,9 @@ export class NavbarComponent implements OnInit {
   async ricercaTitolo() {
     console.log("CIAO", this.daCercare);
     await this.IstanzaRicerca.ricercaTitoloProgetto(this.daCercare)
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/', ).then(() => {
       this.router.navigate(["/home"]); // navigate to same route
     });
   }
-
-  /* async ricercaNomeCognome() {
-
-    await this.IstanzaRicercaNome.ricercaTitoloProgetto(this.daCercare)
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(["/home"]); // navigate to same route
-    });
-
-  } */
 
 }

@@ -40,7 +40,6 @@ export class AmministratoreComponent implements OnInit {
     });
 
 
-
   }
 
   cambioValore() {

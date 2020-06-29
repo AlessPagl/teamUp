@@ -60,6 +60,7 @@ class RicercaProgetto {
             if (users != null) {
                 this.idLoggato = users.uid;
             }
+            
             this.firestore.collection("Progetto").get().forEach((projs) => {
                 projs.forEach((proj) => {
                     nomeProj = proj.data().nome

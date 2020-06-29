@@ -59,10 +59,10 @@ export class HomeComponent implements OnInit {
   public progetto = { nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idListaAttesa: [], idPartecipanti: [] };
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
-    this.valueservice.cast.subscribe(data => this.isAdmin = data);
+    //this.valueservice.cast.subscribe(data => this.isAdmin = data);
 
     this.afAuth.authState.subscribe((user) => {
-
+      console.log(user)
       if ((user === null) && (this.isAdmin === false)) {
         this.router.navigate(['/login']);
       }
