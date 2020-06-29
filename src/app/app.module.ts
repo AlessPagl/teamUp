@@ -19,6 +19,7 @@ import { AmministratoreComponent } from './amministratore/amministratore.compone
 import { RiepilogoProgettoComponent } from './riepilogo-progetto/riepilogo-progetto.component';
 import { ProgettoComponent } from './progetto/progetto.component';
 import { ProgettiTeamMateComponent } from './progetti-team-mate/progetti-team-mate.component';
+import { ElencoUtentiComponent } from './elenco-utenti/elenco-utenti.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProgettiTeamMateComponent } from './progetti-team-mate/progetti-team-ma
     RiepilogoProgettoComponent,
     ProgettoComponent,
     ProgettiTeamMateComponent,
+    ElencoUtentiComponent,
   ],
 
   imports: [
