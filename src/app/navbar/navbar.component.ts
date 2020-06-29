@@ -61,11 +61,12 @@ export class NavbarComponent implements OnInit {
   }
 
   async ricercaTitolo() {
-    console.log("CIAO", this.daCercare);
+    
     await this.IstanzaRicerca.ricercaTitoloProgetto(this.daCercare)
     this.router.navigateByUrl('/', ).then(() => {
       this.router.navigate(["/home"]); // navigate to same route
     });
+    
   }
 
 }

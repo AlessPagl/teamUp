@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(public afAuth: AngularFireAuth, public router: Router) {  
-    this.afAuth.signOut();
+    /* this.afAuth.signOut(); */
   }
 
   public teamMate = { email: "", password: "" };
@@ -23,11 +23,22 @@ export class LoginComponent implements OnInit {
 
     /* var result = await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password); */
 
-    await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password).catch(function(error) {
-      window.confirm("Campi inseriti non validi!");
-    })
+    await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password).then((user) => {
+      if(user) {
 
-    this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
+
+      }
+    })
+    .catch((error) => {
+
+      window.confirm("Campi inseriti non validi!");
+
+      this.router.navigateByUrl('/', ).then(() => {
+        this.router.navigate(["/login"]); // navigate to same route
+      });
+      
+    })
 
   }
 

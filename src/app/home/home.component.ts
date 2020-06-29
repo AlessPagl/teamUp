@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
   public progetto = { nome: "", descrizione: "", genere: "", num_partecipanti: "", teamLeader: "", data_pubblicazione: null, num_teamMate: 0, stato: "aperto", idListaAttesa: [], idPartecipanti: [] };
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public firestore: AngularFirestore, private valueservice: ValueService) {
-    //this.valueservice.cast.subscribe(data => this.isAdmin = data);
+    
 
     this.afAuth.authState.subscribe((user) => {
       console.log(user)
@@ -153,6 +153,11 @@ export class HomeComponent implements OnInit {
 
   eliminaProgetto(idProgetto) {
     this.firestore.collection("Progetto").doc(idProgetto).delete();
+
+    this.router.navigateByUrl('/', ).then(() => {
+      this.router.navigate(["/home"]); // navigate to same route
+    });
+    
   }
 
 }

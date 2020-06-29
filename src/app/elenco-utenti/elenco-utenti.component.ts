@@ -62,5 +62,9 @@ export class ElencoUtentiComponent implements OnInit {
       docs.forEach(doc => {
         this.firestore.collection("Progetto").doc(doc.id).delete();
       })})
+
+      this.router.navigateByUrl('/', ).then(() => {
+        this.router.navigate(["/elenco-teamMates"]); // navigate to same route
+      });
   }
 }
