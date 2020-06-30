@@ -60,7 +60,9 @@ export class ElencoUtentiComponent implements OnInit {
     this.firestore.collection("teamMate").doc(idTeamMate).delete();
     this.firestore.collection("Progetto").ref.where("teamLeader","==",idTeamMate).get().then((docs) => {
       docs.forEach(doc => {
-        this.firestore.collection("Progetto").doc(doc.id).delete();
+        this.firestore.collection("Progetto").doc(doc.id).update({
+          stato:"chiuso"
+           });
       })})
 
       this.router.navigateByUrl('/', ).then(() => {

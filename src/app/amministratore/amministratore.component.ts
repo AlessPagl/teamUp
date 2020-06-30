@@ -35,6 +35,7 @@ export class AmministratoreComponent implements OnInit {
           this.router.navigate(['/home']);
           this.cambioValore();
         }
+        
 
       })
     });

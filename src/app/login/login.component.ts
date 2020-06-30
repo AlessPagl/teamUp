@@ -14,14 +14,13 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(public afAuth: AngularFireAuth, public router: Router) {  
-    /* this.afAuth.signOut(); */
+    this.afAuth.signOut(); 
   }
 
   public teamMate = { email: "", password: "" };
 
   async login() {
 
-    /* var result = await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password); */
 
     await this.afAuth.signInWithEmailAndPassword(this.teamMate.email, this.teamMate.password).then((user) => {
       if(user) {
